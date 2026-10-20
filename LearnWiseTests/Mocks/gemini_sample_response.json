@@ -1,0 +1,132 @@
+{
+  "topic": "Dynamic Programming",
+  "category": "DSA",
+  "resources": [
+    {
+      "title": "Dynamic Programming - Learn to Solve Algorithmic Problems & Coding Challenges",
+      "type": "video",
+      "description": "A 5-hour freeCodeCamp course that teaches memoization and tabulation through classic problems.",
+      "source": "freeCodeCamp (YouTube)",
+      "difficulty": "beginner",
+      "estimatedMinutes": 300,
+      "url": null,
+      "searchQuery": "freeCodeCamp dynamic programming learn to solve algorithmic problems",
+      "leetcodeSlug": null
+    },
+    {
+      "title": "5 Simple Steps for Solving Dynamic Programming Problems",
+      "type": "video",
+      "description": "A short, visual framework for finding subproblems and recurrences.",
+      "source": "Reducible (YouTube)",
+      "difficulty": "beginner",
+      "estimatedMinutes": 21,
+      "url": "https://www.youtube.com/watch?v=aPQY__2H3tE",
+      "searchQuery": "Reducible 5 simple steps dynamic programming",
+      "leetcodeSlug": null
+    },
+    {
+      "title": "MIT 6.006 Lecture 15: Dynamic Programming, Part 1",
+      "type": "pdf",
+      "description": "MIT lecture notes introducing SRTBOT, a framework for designing DP algorithms.",
+      "source": "MIT OpenCourseWare",
+      "difficulty": "intermediate",
+      "estimatedMinutes": 60,
+      "url": "https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/",
+      "searchQuery": "MIT 6.006 spring 2020 dynamic programming lecture notes",
+      "leetcodeSlug": null
+    },
+    {
+      "title": "Algorithms Specialization",
+      "type": "course",
+      "description": "Stanford's algorithms course on Coursera; Part 3 covers greedy algorithms and dynamic programming.",
+      "source": "Coursera",
+      "difficulty": "intermediate",
+      "estimatedMinutes": 1200,
+      "url": "https://www.coursera.org/specializations/algorithms",
+      "searchQuery": "Stanford algorithms specialization coursera",
+      "leetcodeSlug": null
+    },
+    {
+      "title": "Climbing Stairs",
+      "type": "leetcode",
+      "description": "The classic first DP problem: count the distinct ways to reach the top.",
+      "source": "LeetCode",
+      "difficulty": "beginner",
+      "estimatedMinutes": 20,
+      "url": null,
+      "searchQuery": "climbing stairs",
+      "leetcodeSlug": "climbing-stairs"
+    },
+    {
+      "title": "House Robber",
+      "type": "leetcode",
+      "description": "Choose non-adjacent houses to maximise the total; introduces include/exclude states.",
+      "source": "LeetCode",
+      "difficulty": "intermediate",
+      "estimatedMinutes": 30,
+      "url": null,
+      "searchQuery": "house robber",
+      "leetcodeSlug": "house-robber"
+    },
+    {
+      "title": "Coin Change",
+      "type": "leetcode",
+      "description": "Unbounded knapsack-style DP to find the fewest coins for an amount.",
+      "source": "LeetCode",
+      "difficulty": "intermediate",
+      "estimatedMinutes": 40,
+      "url": null,
+      "searchQuery": "coin change",
+      "leetcodeSlug": "coin-change"
+    },
+    {
+      "title": "Introduction to Dynamic Programming",
+      "type": "notes",
+      "description": "Explains overlapping subproblems and optimal substructure, with examples.",
+      "source": "GeeksforGeeks",
+      "difficulty": "beginner",
+      "estimatedMinutes": 15,
+      "url": "https://www.geeksforgeeks.org/introduction-to-dynamic-programming-data-structures-and-algorithm-tutorials/",
+      "searchQuery": "geeksforgeeks introduction to dynamic programming",
+      "leetcodeSlug": null
+    }
+  ],
+  "roadmap": [
+    {
+      "order": 2,
+      "title": "Solve 1-D DP problems",
+      "summary": "Practise writing the state, the recurrence and the base cases on simple problems.",
+      "resourceTitles": ["Climbing Stairs", "House Robber"],
+      "estimatedHours": 3
+    },
+    {
+      "order": 1,
+      "title": "Understand recursion and memoization",
+      "summary": "See how caching overlapping subproblems turns exponential recursion into linear time.",
+      "resourceTitles": [
+        "Dynamic Programming - Learn to Solve Algorithmic Problems & Coding Challenges",
+        "5 Simple Steps for Solving Dynamic Programming Problems",
+        "Introduction to Dynamic Programming"
+      ],
+      "estimatedHours": 6
+    },
+    {
+      "order": 3,
+      "title": "Tackle knapsack-style problems",
+      "summary": "Apply DP to optimisation problems with choices.",
+      "resourceTitles": ["Coin Change"],
+      "estimatedHours": 2
+    },
+    {
+      "order": 4,
+      "title": "Strengthen the theory",
+      "summary": "Study a formal framework for designing DP algorithms.",
+      "resourceTitles": ["MIT 6.006 Lecture 15: Dynamic Programming, Part 1", "Algorithms Specialization"],
+      "estimatedHours": 15
+    }
+  ],
+  "tips": [
+    "Write the recurrence on paper before coding.",
+    "Start with memoization, then convert to bottom-up tabulation."
+  ]
+}

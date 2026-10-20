@@ -1,0 +1,161 @@
+# LearnWise 📚
+
+> **AI-Based Student Resource Recommendation app for iOS, built with SwiftUI.**
+> Tell LearnWise what you want to learn, your skill level, and (optionally) your goal. It recommends YouTube videos, PDFs, courses, LeetCode problems, and notes, and can arrange them into a step-by-step learning roadmap.
+
+![Platform](https://img.shields.io/badge/platform-iOS%2017%2B-blue)
+![Swift](https://img.shields.io/badge/Swift-5.10%20%7C%206-orange)
+![SwiftUI](https://img.shields.io/badge/UI-SwiftUI-purple)
+![AI](https://img.shields.io/badge/AI-Google%20Gemini-4285F4)
+
+---
+
+## ✨ Features
+
+| Feature | Description |
+|---|---|
+| 🔍 **Smart Recommendations** | Enter a topic, a skill level (Beginner / Intermediate / Advanced), and an optional goal (e.g. "crack FAANG interviews", "university exam"). Gemini returns resources picked for that input. |
+| 🗂 **Multi-type Resources** | Results are grouped into **YouTube Videos**, **PDFs**, **Courses**, **LeetCode Problems**, and **Notes / Articles**. |
+| 🧭 **Learning Roadmap** | Turns the recommendations into an ordered path (Step 1 → Step N) with an estimated time for each step. |
+| 🔖 **Bookmarks** | Save any resource. Bookmarks are stored on the device with SwiftData. |
+| 🕘 **Search History** | Past searches are saved so you can re-run one with a single tap. |
+| 📴 **Offline Fallback** | If there's no network or API key, a bundled resource catalog and an optional Core ML topic classifier still return results. |
+| 🌗 **Dark Mode & Accessibility** | Supports Dynamic Type, VoiceOver labels, and light/dark themes. |
+
+## 📸 Screenshots
+
+> _To be added after running on the iOS Simulator._
+
+| Discover | Results | Roadmap | Bookmarks |
+|---|---|---|---|
+| _screenshot_ | _screenshot_ | _screenshot_ | _screenshot_ |
+
+---
+
+## 🛠 Tech Stack
+
+| Layer | Technology |
+|---|---|
+| Language | Swift 5.10 / Swift 6 |
+| UI | SwiftUI (`NavigationStack`, `TabView`, `@Observable`) |
+| Architecture | MVVM + Service layer (protocol-based, testable) |
+| Concurrency | Swift Concurrency (`async/await`, `Task`) |
+| AI / Recommendation | Google **Gemini API** (free tier) via REST `generateContent` with structured JSON output |
+| On-device ML (optional) | **Core ML** text classifier trained with **Create ML** |
+| Persistence | **SwiftData** (`@Model`, `ModelContainer`) |
+| Networking | `URLSession` |
+| In-app browser | `SFSafariViewController` |
+| Testing | XCTest / Swift Testing, XCUITest |
+| Dependencies | None (pure Apple frameworks) |
+
+---
+
+## 📋 Requirements
+
+- macOS 14 Sonoma or later
+- **Xcode 16** or later
+- iOS **17.0+** Simulator or device
+- A free **Gemini API key** from [Google AI Studio](https://aistudio.google.com/app/apikey)
+- _(Optional)_ YouTube Data API v3 key, for real video lookups instead of search links
+
+---
+
+## 🚀 Getting Started
+
+### 1. Clone the repo
+```bash
+git clone <your-repo-url> LearnWise
+cd LearnWise
+```
+
+### 2. Add your API key
+```bash
+cp LearnWise/Config/Secrets.example.xcconfig LearnWise/Config/Secrets.xcconfig
+```
+Open `Secrets.xcconfig` and paste your key:
+```
+GEMINI_API_KEY = your_gemini_key_here
+GEMINI_MODEL = gemini-2.5-flash
+YOUTUBE_API_KEY =
+```
+> `Secrets.xcconfig` is listed in `.gitignore`. **Never commit your API key.**
+
+### 3. Connect the config in Xcode
+1. Open `LearnWise.xcodeproj`.
+2. Select the **project** → **Info** tab → **Configurations**.
+3. Set **Debug** and **Release** for the `LearnWise` target to `Secrets`.
+4. In the target's **Info** tab, make sure these keys exist (they read from the xcconfig):
+   - `GEMINI_API_KEY` → `$(GEMINI_API_KEY)`
+   - `GEMINI_MODEL` → `$(GEMINI_MODEL)`
+   - `YOUTUBE_API_KEY` → `$(YOUTUBE_API_KEY)`
+
+### 4. Run
+Select an iPhone simulator (e.g. iPhone 16) and press **⌘R**.
+
+### 5. Run tests
+Press **⌘U**, or:
+```bash
+xcodebuild test -scheme LearnWise -destination 'platform=iOS Simulator,name=iPhone 16'
+```
+
+---
+
+## 📱 How to Use
+
+1. Open the **Discover** tab.
+2. Type a **topic**, e.g. `Dynamic Programming`, `SwiftUI`, `Linear Algebra`.
+3. Pick your **skill level**: Beginner / Intermediate / Advanced.
+4. _(Optional)_ Enter a **goal**, e.g. `Prepare for coding interviews in 4 weeks`.
+5. Tap **Get Recommendations**.
+6. Browse resources grouped by type. Tap one to open it, or tap 🔖 to bookmark it.
+7. Tap **View Roadmap** to see an ordered learning path, and **Save Roadmap** to keep it.
+8. Find old searches in **History** and saved items in **Bookmarks**.
+
+---
+
+## 📁 Project Structure
+
+```
+LearnWise/
+├── LearnWise/
+│   ├── App/               # App entry point, root TabView, dependency container
+│   ├── Config/            # xcconfig files (Secrets is gitignored)
+│   ├── Models/            # Codable DTOs + SwiftData @Model types
+│   ├── Views/             # SwiftUI screens and reusable components
+│   ├── ViewModels/        # @Observable view models
+│   ├── Services/          # Gemini, LinkResolver, RecommendationEngine, Offline, Core ML
+│   ├── Persistence/       # SwiftData container setup and helpers
+│   ├── Utilities/         # Extensions, constants, AppError
+│   └── Resources/         # Assets, resources_catalog.json, TopicClassifier.mlmodel
+├── LearnWiseTests/
+├── LearnWiseUITests/
+├── README.md
+├── ARCHITECTURE.md
+└── PLAN.md
+```
+See **[ARCHITECTURE.md](ARCHITECTURE.md)** for the full design and **[PLAN.md](PLAN.md)** for the development roadmap.
+
+---
+
+## ⚠️ Notes on the Gemini Free Tier
+
+- The free tier has **per-minute and per-day request limits**. LearnWise caches the last results and shows a friendly message on HTTP `429` responses.
+- AI-generated links can be wrong. LearnWise does **not trust raw URLs** from the model. The `LinkResolver` checks or rebuilds every link (see ARCHITECTURE.md → *Link Resolution*).
+- Calling an LLM API directly from the app exposes the key inside the app bundle. That's fine for a college project, but a production app should route requests through a small backend proxy.
+
+---
+
+## 👥 Team
+
+| Name | Roll No. | Role |
+|---|---|---|
+| _Your Name_ | _xxxx_ | iOS Developer |
+
+**Course:** iOS Development Mini-Project, Final Year (LY)
+**Institute:** K. J. Somaiya
+
+---
+
+## 📄 License
+
+This project was made for academic purposes. MIT License.
