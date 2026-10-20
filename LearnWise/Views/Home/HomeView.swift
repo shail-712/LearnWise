@@ -25,7 +25,7 @@ struct HomeView: View {
                     TextField("e.g. Dynamic Programming", text: $viewModel.topic)
                         .focused($focusedField, equals: .topic)
                         .submitLabel(.search)
-                        .onSubmit(search)
+                        .onSubmit { search() }
                         .autocorrectionDisabled()
                         .accessibilityIdentifier("topicField")
 

@@ -1,0 +1,8 @@
+# Keep Unix line endings for files the Mac runs or Xcode reads, even when committed from Windows.
+*.sh       text eol=lf
+*.swift    text eol=lf
+*.xcconfig text eol=lf
+*.pbxproj  text eol=lf
+*.plist    text eol=lf
+*.yml      text eol=lf
+*.png      binary

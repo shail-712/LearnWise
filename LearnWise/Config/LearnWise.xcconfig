@@ -1,0 +1,10 @@
+// Build settings for the LearnWise target (committed).
+// Real keys go in Secrets.xcconfig (gitignored), which overrides the empty values below.
+// "#include?" means the build still works when Secrets.xcconfig doesn't exist yet.
+// The app then runs on the offline catalog.
+
+GEMINI_API_KEY =
+GEMINI_MODEL = gemini-3.8-flash
+YOUTUBE_API_KEY =
+
+#include? "Secrets.xcconfig"
