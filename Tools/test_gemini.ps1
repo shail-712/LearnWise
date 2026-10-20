@@ -3,8 +3,9 @@
     Sends the LearnWise prompt to Gemini and prints the JSON the model returns.
     Use it on Windows to tune the prompt and schema before the app runs on a Mac.
 
+    The key is read from .env in the project root (copy .env.example), or from $env:GEMINI_API_KEY.
+
 .EXAMPLE
-    $env:GEMINI_API_KEY = "your_key"
     .\Tools\test_gemini.ps1
     .\Tools\test_gemini.ps1 -Topic "SwiftUI" -Level intermediate -Goal "Build my first app"
     .\Tools\test_gemini.ps1 -Topic "Graphs" -OutFile Tools\output\graphs.json
@@ -14,14 +15,31 @@ param(
     [ValidateSet("beginner", "intermediate", "advanced")]
     [string]$Level = "beginner",
     [string]$Goal = "General understanding",
-    [string]$Model = "gemini-2.5-flash",
+    [string]$Model,
     [string]$OutFile
 )
 
 $ErrorActionPreference = "Stop"
 
+# Load KEY=value lines from .env. Variables already set in the shell take priority.
+$envFile = Join-Path $PSScriptRoot "..\.env"
+if (Test-Path $envFile) {
+    foreach ($line in Get-Content $envFile -Encoding UTF8) {
+        if ($line -match '^\s*([A-Za-z_][A-Za-z0-9_]*)\s*=\s*(.*?)\s*$' -and -not $line.TrimStart().StartsWith("#")) {
+            $name = $Matches[1]
+            $value = $Matches[2].Trim('"', "'")
+            if ($value -and -not [Environment]::GetEnvironmentVariable($name)) {
+                [Environment]::SetEnvironmentVariable($name, $value, "Process")
+            }
+        }
+    }
+}
+
 if (-not $env:GEMINI_API_KEY) {
-    Write-Error 'Set your key first:  $env:GEMINI_API_KEY = "your_key"'
+    Write-Error "No Gemini key found. Add GEMINI_API_KEY to .env in the project root (see .env.example)."
+}
+if (-not $Model) {
+    $Model = if ($env:GEMINI_MODEL) { $env:GEMINI_MODEL } else { "gemini-3.8-flash" }
 }
 
 # Same system prompt and schema as PromptBuilder.swift. Only the user prompt changes.
@@ -40,7 +58,12 @@ try {
         -Body ([System.Text.Encoding]::UTF8.GetBytes($body))
 } catch {
     Write-Host "Request failed: $($_.Exception.Message)" -ForegroundColor Red
-    if ($_.ErrorDetails.Message) { Write-Host $_.ErrorDetails.Message }
+    # Windows PowerShell 5.1 often leaves ErrorDetails empty, so read the body directly.
+    $detail = $_.ErrorDetails.Message
+    if (-not $detail -and $_.Exception.Response) {
+        $detail = (New-Object System.IO.StreamReader($_.Exception.Response.GetResponseStream())).ReadToEnd()
+    }
+    if ($detail) { Write-Host $detail }
     exit 1
 }
 $timer.Stop()

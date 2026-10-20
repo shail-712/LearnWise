@@ -99,13 +99,13 @@ final class RecommendationDecodingTests: XCTestCase {
     }
 
     func testRequestBodyContainsSchemaAndPrompt() throws {
-        let service = GeminiService(apiKey: "test-key", model: "gemini-2.5-flash")
+        let service = GeminiService(apiKey: "test-key", model: "gemini-3.8-flash")
         let urlRequest = try service.makeURLRequest(for: SampleData.request, apiKey: "test-key")
         let body = try XCTUnwrap(urlRequest.httpBody)
         let json = try XCTUnwrap(JSONSerialization.jsonObject(with: body) as? [String: Any])
         let config = try XCTUnwrap(json["generationConfig"] as? [String: Any])
 
-        XCTAssertEqual(urlRequest.url?.absoluteString, "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent")
+        XCTAssertEqual(urlRequest.url?.absoluteString, "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:generateContent")
         XCTAssertEqual(urlRequest.value(forHTTPHeaderField: "x-goog-api-key"), "test-key")
         XCTAssertEqual(config["responseMimeType"] as? String, "application/json")
         XCTAssertNotNil(config["responseSchema"])

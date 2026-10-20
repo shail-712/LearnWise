@@ -75,7 +75,7 @@ cp LearnWise/Config/Secrets.example.xcconfig LearnWise/Config/Secrets.xcconfig
 Open `Secrets.xcconfig` and paste your key:
 ```
 GEMINI_API_KEY = your_gemini_key_here
-GEMINI_MODEL = gemini-2.5-flash
+GEMINI_MODEL = gemini-3.8-flash
 YOUTUBE_API_KEY =
 ```
 > `Secrets.xcconfig` is listed in `.gitignore`. **Never commit your API key.**

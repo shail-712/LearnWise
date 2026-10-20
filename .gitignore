@@ -1,5 +1,6 @@
 # Secrets — never commit real API keys
 LearnWise/Config/Secrets.xcconfig
+.env
 
 # macOS
 .DS_Store

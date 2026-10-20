@@ -2,7 +2,7 @@ import Foundation
 
 enum Constants {
     static let geminiBaseURL = "https://generativelanguage.googleapis.com/v1beta"
-    static let defaultGeminiModel = "gemini-2.5-flash"
+    static let defaultGeminiModel = "gemini-3.8-flash"
     static let youtubeSearchEndpoint = "https://www.googleapis.com/youtube/v3/search"
 
     static let maxTopicLength = 100

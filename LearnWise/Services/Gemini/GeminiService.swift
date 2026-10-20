@@ -29,7 +29,8 @@ struct GeminiService: RecommendationProviding {
         }
         var urlRequest = URLRequest(url: url)
         urlRequest.httpMethod = "POST"
-        urlRequest.timeoutInterval = 60
+        // Free-tier replies took 1.5–3 minutes in testing (Oct 2026), so allow plenty of time.
+        urlRequest.timeoutInterval = 180
         urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
         urlRequest.setValue(apiKey, forHTTPHeaderField: "x-goog-api-key")
         urlRequest.httpBody = try JSONEncoder().encode(PromptBuilder.makeRequest(for: request))

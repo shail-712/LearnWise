@@ -141,7 +141,7 @@ Development is split because no Mac is available right now.
 - Keep the pure-logic files (models, prompt, link resolver) free of `import SwiftUI` so they can be checked on Windows.
 - Test the Gemini prompt with `curl` now, so the JSON shape is settled before you reach the Mac:
   ```bash
-  curl -s "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent" \
+  curl -s "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:generateContent" \
     -H "x-goog-api-key: $GEMINI_API_KEY" -H "Content-Type: application/json" \
     -d @request.json
   ```
