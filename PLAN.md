@@ -39,18 +39,15 @@ Students waste time searching scattered platforms (YouTube, PDFs, MOOCs, LeetCod
 
 ## 4. Milestones
 
-### Phase 0: Project Setup _(Mac)_
-- [ ] Xcode → File → New → Project → iOS **App** → name `LearnWise`, Interface **SwiftUI**, Storage **SwiftData**, include tests
-- [ ] Set the deployment target to **iOS 17.0**
-- [ ] **Delete the template's `LearnWiseApp.swift`, `ContentView.swift` and `Item.swift`.** Ours replace them; keeping both gives a duplicate `@main` error.
-- [ ] Drag the existing `LearnWise/`, `LearnWiseTests/` and `LearnWiseUITests/` folders into Xcode ("Create groups", tick the matching target). Leave `Tools/` out of every target.
-- [ ] Check target membership: `resources_catalog.json` → LearnWise; `gemini_sample_response.json` → LearnWiseTests
-- [x] Add `Config/Secrets.example.xcconfig` and `.gitignore`
-- [ ] Copy it to `Secrets.xcconfig` and add your key
-- [ ] Wire the xcconfig to the build configurations and add the Info.plist keys
-- [ ] `git init` + first commit
+### Phase 0: Project Setup
+- [x] `LearnWise.xcodeproj` generated from `project.yml` with XcodeGen (three targets, iOS 17, Swift 5 mode, Info.plist keys, xcconfig wiring, resources); 65/65 Swift files checked as included
+- [x] App icon + accent color in `Assets.xcassets`
+- [x] `Config/LearnWise.xcconfig` (committed) optionally includes `Secrets.xcconfig` (gitignored), so the project builds with or without a key
+- [ ] _(Mac)_ `bash setup_mac.sh`: creates `Secrets.xcconfig` from `.env` and opens Xcode
 
-> **Legend:** ✍️ = written on Windows, not yet compiled. Change it to `[x]` after it builds and its tests pass in Xcode.
+> **Legend:** ✍️ = written on Windows. Change it to `[x]` after it builds and its tests pass in Xcode.
+>
+> **Verified on Windows (Swift 6.0 compiler, Linux/Docker):** all non-UI code (models, utilities, services, view models, AppEnvironment/AppRouter: 32 files) compiles, and **64 unit tests pass** (1 skipped until the Core ML model is added). Not compilable off a Mac: the SwiftUI views, the SwiftData models/persistence, `PersistenceTests` and the UI tests.
 
 ### Phase 1: Models and Persistence ✍️
 - [ ] ✍️ `SkillLevel`, `ResourceType`, `LearningRequest`, `Resource`, `RoadmapStep`, `RecommendationResponse`

@@ -97,37 +97,27 @@ All source code for Phases 1–10 has been written, and the tests are in place: 
 
 ## 🚀 Getting Started
 
+The Xcode project (`LearnWise.xcodeproj`) is already in the repo, generated from `project.yml`. There's no project setup to do.
+
 ### 1. Clone the repo
 ```bash
-git clone <your-repo-url> LearnWise
+git clone https://github.com/shail-712/Mini-Project.git LearnWise
 cd LearnWise
 ```
 
-### 2. Add your API key
+### 2. Add your key and open Xcode
+Your `.env` isn't in git, so copy it into the folder first (or just paste the key when asked). Then run:
 ```bash
-cp LearnWise/Config/Secrets.example.xcconfig LearnWise/Config/Secrets.xcconfig
+bash setup_mac.sh
 ```
-Open `Secrets.xcconfig` and paste your key:
-```
-GEMINI_API_KEY = your_gemini_key_here
-GEMINI_MODEL = gemini-3.8-flash
-YOUTUBE_API_KEY =
-```
-> `Secrets.xcconfig` is listed in `.gitignore`. **Never commit your API key.**
+This writes `LearnWise/Config/Secrets.xcconfig` (gitignored) from your `.env` and opens the project.
+> Without a key the app still builds and runs, on the offline catalog.
 
-### 3. Connect the config in Xcode
-1. Open `LearnWise.xcodeproj`.
-2. Select the **project** → **Info** tab → **Configurations**.
-3. Set **Debug** and **Release** for the `LearnWise` target to `Secrets`.
-4. In the target's **Info** tab, make sure these keys exist (they read from the xcconfig):
-   - `GEMINI_API_KEY` → `$(GEMINI_API_KEY)`
-   - `GEMINI_MODEL` → `$(GEMINI_MODEL)`
-   - `YOUTUBE_API_KEY` → `$(YOUTUBE_API_KEY)`
-
-### 4. Run
+### 3. Run
 Select an iPhone simulator (e.g. iPhone 16) and press **⌘R**.
+Building for a real iPhone needs your Apple ID: target → **Signing & Capabilities** → choose your **Team**. The simulator needs nothing.
 
-### 5. Run tests
+### 4. Run tests
 Press **⌘U**, or:
 ```bash
 xcodebuild test -scheme LearnWise -destination 'platform=iOS Simulator,name=iPhone 16'

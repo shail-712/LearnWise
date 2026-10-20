@@ -36,7 +36,7 @@ final class UtilityTests: XCTestCase {
     }
 
     @MainActor
-    func testRouterSearchAgainSwitchesToDiscover() {
+    func testRouterSearchAgainSwitchesToDiscover() async {
         let router = AppRouter()
         router.selectedTab = .history
 

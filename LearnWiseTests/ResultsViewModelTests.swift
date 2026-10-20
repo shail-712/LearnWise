@@ -7,14 +7,14 @@ final class ResultsViewModelTests: XCTestCase {
         ResultsViewModel(request: SampleData.request, response: SampleData.response)
     }
 
-    func testShowsAllTypesByDefault() {
+    func testShowsAllTypesByDefault() async {
         let viewModel = makeViewModel()
 
         XCTAssertNil(viewModel.selectedType)
         XCTAssertEqual(viewModel.visibleTypes, SampleData.response.availableTypes)
     }
 
-    func testFilterShowsOneType() {
+    func testFilterShowsOneType() async {
         let viewModel = makeViewModel()
 
         viewModel.toggleFilter(.leetcode)
@@ -23,7 +23,7 @@ final class ResultsViewModelTests: XCTestCase {
         XCTAssertEqual(viewModel.count(of: .leetcode), 2)
     }
 
-    func testTappingSelectedFilterAgainShowsAll() {
+    func testTappingSelectedFilterAgainShowsAll() async {
         let viewModel = makeViewModel()
 
         viewModel.toggleFilter(.video)
@@ -33,7 +33,7 @@ final class ResultsViewModelTests: XCTestCase {
         XCTAssertEqual(viewModel.visibleTypes.count, SampleData.response.availableTypes.count)
     }
 
-    func testAllChipClearsFilter() {
+    func testAllChipClearsFilter() async {
         let viewModel = makeViewModel()
 
         viewModel.toggleFilter(.pdf)
@@ -42,7 +42,7 @@ final class ResultsViewModelTests: XCTestCase {
         XCTAssertNil(viewModel.selectedType)
     }
 
-    func testOnlyTypesWithResultsAreFilters() {
+    func testOnlyTypesWithResultsAreFilters() async {
         let response = RecommendationResponse(
             topic: "X",
             category: "General",

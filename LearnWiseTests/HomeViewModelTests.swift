@@ -4,7 +4,7 @@ import XCTest
 @MainActor
 final class HomeViewModelTests: XCTestCase {
 
-    func testBlankTopicShowsValidationMessageAndDoesNotSearch() {
+    func testBlankTopicShowsValidationMessageAndDoesNotSearch() async {
         let viewModel = HomeViewModel(provider: MockGeminiService.success)
         viewModel.topic = "   "
 
@@ -78,7 +78,7 @@ final class HomeViewModelTests: XCTestCase {
         XCTAssertEqual(viewModel.state, .loaded(SampleData.response))
     }
 
-    func testPrefillAndSuggestion() {
+    func testPrefillAndSuggestion() async {
         let viewModel = HomeViewModel(provider: MockGeminiService.success)
 
         viewModel.prefill(from: LearningRequest(topic: "SQL", level: .advanced, goal: "Exams"))
