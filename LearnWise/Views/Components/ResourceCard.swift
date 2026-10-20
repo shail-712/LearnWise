@@ -1,20 +1,17 @@
 import SwiftUI
 
-/// One resource row. Tapping it opens the resolved link.
+/// One resource row: title, description, difficulty, source, duration and a bookmark button.
+/// The caller decides what tapping the row does (usually a NavigationLink to the detail screen).
 struct ResourceCard: View {
     let resource: Resource
-    @Environment(\.openURL) private var openURL
+    var isBookmarked = false
+    var onToggleBookmark: (() -> Void)?
 
     var body: some View {
-        Button {
-            if let url = resource.resolvedURL {
-                openURL(url)
-            }
-        } label: {
+        HStack(alignment: .top, spacing: 12) {
             VStack(alignment: .leading, spacing: 6) {
                 Text(resource.title)
                     .font(.headline)
-                    .foregroundStyle(.primary)
                     .multilineTextAlignment(.leading)
 
                 if !resource.description.isEmpty {
@@ -33,18 +30,40 @@ struct ResourceCard: View {
                     }
                     if let duration = resource.durationText {
                         Label(duration, systemImage: "clock")
+                            .labelStyle(.titleAndIcon)
                     }
                 }
                 .font(.caption)
                 .foregroundStyle(.secondary)
             }
-            .padding(.vertical, 4)
             .frame(maxWidth: .infinity, alignment: .leading)
-            .contentShape(Rectangle())
+
+            if let onToggleBookmark {
+                BookmarkButton(isBookmarked: isBookmarked, action: onToggleBookmark)
+            }
         }
-        .buttonStyle(.plain)
-        .disabled(resource.resolvedURL == nil)
-        .accessibilityHint("Opens the resource")
+        .padding(.vertical, 4)
+    }
+}
+
+struct BookmarkButton: View {
+    let isBookmarked: Bool
+    let action: () -> Void
+
+    var body: some View {
+        Button(action: action) {
+            Image(systemName: isBookmarked ? "bookmark.fill" : "bookmark")
+                .font(.title3)
+                .foregroundStyle(.tint)
+                .contentTransition(.symbolEffect(.replace))
+                .frame(width: 44, height: 44)
+                .contentShape(Rectangle())
+        }
+        // .borderless keeps the button tappable on its own inside a List row / NavigationLink.
+        .buttonStyle(.borderless)
+        .sensoryFeedback(.selection, trigger: isBookmarked)
+        .accessibilityLabel(isBookmarked ? "Remove bookmark" : "Bookmark")
+        .accessibilityIdentifier("bookmarkButton")
     }
 }
 
@@ -71,6 +90,6 @@ struct DifficultyBadge: View {
 
 #Preview {
     List(SampleData.resources) { resource in
-        ResourceCard(resource: resource)
+        ResourceCard(resource: resource, isBookmarked: resource.type == .video) {}
     }
 }

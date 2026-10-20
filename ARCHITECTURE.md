@@ -565,8 +565,9 @@ RootTabView (TabView)
 └── Settings   → SettingsView (API key status, model name, clear history, about)
 ```
 
-- Navigation uses `NavigationStack(path:)` with an `enum Route: Hashable { case results(RecommendationResponse), roadmap(...), detail(Resource) }`.
-- External links open in `SafariView` (`SFSafariViewController`), presented as a `.sheet`.
+- Navigation uses `NavigationStack(path:)` with `enum Route: Hashable { case results(LearningRequest, RecommendationResponse), detail(Resource, topic:) }` (roadmap is added in Phase 7). Every stack calls `.learnWiseRoutes()`, so destinations are declared once in `Route.swift`.
+- **Links:** `RootTabView` applies `.opensLinksInApp()`, which replaces the `openURL` environment action. Every http(s) link (`Link`, `openURL(url)`, context-menu "Open") then opens in `SafariView` (`SFSafariViewController`) as a sheet, with no per-screen code. Other schemes (mailto:, tel:) go to the system.
+- **Bookmarks in lists:** `ResultsView` uses `@Query` for all bookmarks and builds a `Set` of keys, so the bookmark icons update the moment one is toggled anywhere.
 
 ---
 

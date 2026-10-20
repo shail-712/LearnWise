@@ -1,8 +1,9 @@
 import SwiftUI
 
-/// Screens pushed onto a NavigationStack. Roadmap and detail routes are added in Phases 4 and 7.
+/// Screens pushed onto a NavigationStack. The roadmap route is added in Phase 7.
 enum Route: Hashable {
     case results(LearningRequest, RecommendationResponse)
+    case detail(Resource, topic: String)
 }
 
 extension View {
@@ -12,6 +13,8 @@ extension View {
             switch route {
             case .results(let request, let response):
                 ResultsView(request: request, response: response)
+            case .detail(let resource, let topic):
+                ResourceDetailView(resource: resource, topic: topic)
             }
         }
     }

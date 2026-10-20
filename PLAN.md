@@ -78,16 +78,16 @@ Students waste time searching scattered platforms (YouTube, PDFs, MOOCs, LeetCod
 - [ ] Try the prompt on Windows: `.\Tools\test_gemini.ps1` (needs a key)
 - [ ] Test with a real key on the simulator. Log the raw JSON in DEBUG builds.
 
-### Phase 4: Results and Link Resolution
-- [ ] `ResultsView` with sections per `ResourceType`, plus a filter chip bar
-- [ ] `ResourceCard` (title, source, difficulty badge, duration, bookmark button)
-- [ ] `ResourceDetailView`
+### Phase 4: Results and Link Resolution ✍️
+- [ ] ✍️ `ResultsView` with sections per `ResourceType` (`ResourceSectionView`), a filter chip bar, and `ResultsViewModel` + tests
+- [ ] ✍️ `ResourceCard` (title, source, difficulty badge, duration, bookmark button with haptic)
+- [ ] ✍️ `ResourceDetailView` (open/share/bookmark; says when a link is a search rather than a direct link)
 - [ ] ✍️ `LinkResolver` with allow-lists and search fallbacks (+ optional `YouTubeService`)
-- [ ] `SafariView` wrapper
-- [ ] ✍️ `LinkResolverTests`
+- [ ] ✍️ `SafariView` + `.opensLinksInApp()`: every http(s) link in the app opens in an in-app sheet
+- [ ] ✍️ `LinkResolverTests`, `PersistenceTests`, UI test: results → detail → bookmark
 
 ### Phase 5: Bookmarks
-- [ ] Toggle bookmarks from `ResourceCard` (de-duplicated by `key`)
+- [ ] ✍️ Toggle bookmarks from `ResourceCard` and the detail screen (de-duplicated by `key`), done in Phase 4
 - [ ] `BookmarksView` using `@Query(sort: \.createdAt, order: .reverse)`, grouped by topic
 - [ ] Swipe-to-delete, empty state
 

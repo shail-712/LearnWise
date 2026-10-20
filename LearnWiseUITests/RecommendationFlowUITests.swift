@@ -25,6 +25,19 @@ final class RecommendationFlowUITests: XCTestCase {
         XCTAssertTrue(card.waitForExistence(timeout: 5))
     }
 
+    func testOpenDetailAndBookmark() {
+        app.buttons["Dynamic Programming"].tap()       // suggestion chip
+        app.buttons["searchButton"].tap()
+
+        let card = app.buttons.matching(NSPredicate(format: "label CONTAINS 'Climbing Stairs'")).firstMatch
+        XCTAssertTrue(card.waitForExistence(timeout: 10))
+        card.tap()
+
+        XCTAssertTrue(app.buttons["openResourceButton"].waitForExistence(timeout: 5))
+        app.buttons["detailBookmarkButton"].tap()
+        XCTAssertEqual(app.buttons["detailBookmarkButton"].label, "Remove bookmark")
+    }
+
     func testSuggestionChipFillsTopic() {
         app.buttons["SwiftUI"].tap()
 

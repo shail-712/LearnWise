@@ -91,6 +91,18 @@ final class LinkResolverTests: XCTestCase {
         XCTAssertEqual(queryValue(url, "q"), "dp notes filetype:pdf")
     }
 
+    func testSearchFallbackDetection() async {
+        let search = await resolver.url(for: makeResource(.video))
+        let problem = await resolver.url(for: makeResource(.leetcode, slug: "two-sum"))
+        let course = await resolver.url(for: makeResource(.course, url: "https://www.coursera.org/search"))
+
+        XCTAssertTrue(search.isSearchFallback)
+        XCTAssertTrue(URL.googleSearch("x").isSearchFallback)
+        XCTAssertTrue(URL.leetcodeSearch("x").isSearchFallback)
+        XCTAssertFalse(problem.isSearchFallback)
+        XCTAssertFalse(course.isSearchFallback, "only our own fallback hosts count")
+    }
+
     // MARK: Encoding and batch
 
     func testPlusSignIsEncoded() async {

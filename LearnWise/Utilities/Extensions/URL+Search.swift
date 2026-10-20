@@ -17,6 +17,15 @@ extension URL {
         URL(string: "https://leetcode.com/problems/\(slug)/")
     }
 
+    /// True for the search links LinkResolver builds when it can't trust a direct link
+    /// (YouTube results, Google search, the LeetCode problem list).
+    var isSearchFallback: Bool {
+        let urlPath = path()
+        return (isHosted(on: ["youtube.com"]) && urlPath == "/results")
+            || (isHosted(on: ["google.com"]) && urlPath == "/search")
+            || (isHosted(on: ["leetcode.com"]) && urlPath == "/problemset/")
+    }
+
     var isHTTPS: Bool {
         scheme?.lowercased() == "https"
     }
