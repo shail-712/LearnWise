@@ -97,21 +97,26 @@ All source code for Phases 1–10 has been written, and the tests are in place: 
 
 ## 🚀 Getting Started
 
-The Xcode project (`LearnWise.xcodeproj`) is already in the repo, generated from `project.yml`. There's no project setup to do.
+The Xcode project (`LearnWise.xcodeproj`) is already in the repo. There's no project setup to do.
 
 ### 1. Clone the repo
 ```bash
-git clone https://github.com/shail-712/Mini-Project.git LearnWise
+git clone https://github.com/shail-712/LearnWise.git
 cd LearnWise
 ```
 
-### 2. Add your key and open Xcode
-Your `.env` isn't in git, so copy it into the folder first (or just paste the key when asked). Then run:
+### 2. Add your Gemini key
 ```bash
-bash setup_mac.sh
+cp LearnWise/Config/Secrets.example.xcconfig LearnWise/Config/Secrets.xcconfig
+open -e LearnWise/Config/Secrets.xcconfig
 ```
-This writes `LearnWise/Config/Secrets.xcconfig` (gitignored) from your `.env` and opens the project.
+Paste your key after `GEMINI_API_KEY =` and save. This file is gitignored, so never commit it.
 > Without a key the app still builds and runs, on the offline catalog.
+
+Then open the project:
+```bash
+open LearnWise.xcodeproj
+```
 
 ### 3. Run
 Select an iPhone simulator (e.g. iPhone 16) and press **⌘R**.
@@ -142,6 +147,7 @@ xcodebuild test -scheme LearnWise -destination 'platform=iOS Simulator,name=iPho
 
 ```
 LearnWise/
+├── LearnWise.xcodeproj    # Open this in Xcode
 ├── LearnWise/
 │   ├── App/               # App entry point, root TabView, dependency container
 │   ├── Config/            # xcconfig files (Secrets is gitignored)
@@ -152,7 +158,7 @@ LearnWise/
 │   ├── Persistence/       # SwiftData container setup and helpers
 │   ├── Utilities/         # Extensions, constants, AppError
 │   └── Resources/         # Assets, resources_catalog.json, LearnWiseTopicClassifier.mlmodel
-├── Tools/                 # Windows helper scripts + Create ML training data (not in the app)
+├── CreateML/              # Training data for the optional Core ML model (not in the app)
 ├── LearnWiseTests/
 ├── LearnWiseUITests/
 ├── README.md

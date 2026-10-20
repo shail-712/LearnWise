@@ -182,12 +182,8 @@ LearnWise/
 ├── LearnWiseUITests/
 │   └── RecommendationFlowUITests.swift
 │
-└── Tools/                                # Not part of the app target
-    ├── gemini_request.json               # Same prompt and schema as PromptBuilder.swift
-    ├── test_gemini.ps1                   # Calls Gemini from Windows/PowerShell to test prompts
-    ├── validate_catalog.ps1              # Checks resources_catalog.json and its URLs
-    └── CreateML/
-        └── topics_training.csv           # Training data for LearnWiseTopicClassifier
+└── CreateML/                             # Not part of the app target
+    └── topics_training.csv               # Training data for LearnWiseTopicClassifier
 ```
 
 > `LinkResolving.swift` also declares the `YouTubeSearching` protocol.
@@ -471,8 +467,6 @@ _Optional extension:_ a lightweight `HEAD` request (timeout 3 s) to drop any URL
 - **No match:** `TopicClassifier` predicts a **category**, and resources are pooled from every catalog topic in that category.
 - **Picking** (`pick(_:for:limit:)`): takes resources round-robin by type, so the mix stays varied, up to 10. Within each type, the closest difficulty comes first, and a resource one level harder beats one a level easier.
 - **Roadmap** (rule-based): *Build the foundations* (videos, notes) → *Go deeper* (courses, PDFs) → *Practise* (LeetCode). Empty stages are skipped, and hours come from `estimatedMinutes` (30 min when missing).
-- **Checking on Windows:** `Tools/validate_catalog.ps1` checks types, levels, slugs and duplicate keywords, and checks every URL against the same allow-list `LinkResolver` uses.
-
 `resources_catalog.json` shape:
 ```json
 [
@@ -488,7 +482,7 @@ _Optional extension:_ a lightweight `HEAD` request (timeout 3 s) to drop any URL
 ### 6.2 `TopicClassifier` (optional Core ML)
 - **Model:** Create ML **Text Classifier** (Maximum Entropy or Transfer Learning / BERT embeddings).
 - **Name:** the file must be **`LearnWiseTopicClassifier.mlmodel`**. If it were called `TopicClassifier.mlmodel`, Xcode's generated class would clash with our `TopicClassifier` wrapper.
-- **Training data:** `Tools/CreateML/topics_training.csv`, with 255 rows and at least 30 per label, in the columns `text,label`. For example:
+- **Training data:** `CreateML/topics_training.csv`, with 255 rows and at least 30 per label, in the columns `text,label`. For example:
   ```
   text,label
   binary search tree insertion,DSA

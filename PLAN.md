@@ -40,10 +40,10 @@ Students waste time searching scattered platforms (YouTube, PDFs, MOOCs, LeetCod
 ## 4. Milestones
 
 ### Phase 0: Project Setup
-- [x] `LearnWise.xcodeproj` generated from `project.yml` with XcodeGen (three targets, iOS 17, Swift 5 mode, Info.plist keys, xcconfig wiring, resources); 65/65 Swift files checked as included
+- [x] `LearnWise.xcodeproj` generated with XcodeGen (three targets, iOS 17, Swift 5 mode, Info.plist keys, xcconfig wiring, resources); 65/65 Swift files checked as included
 - [x] App icon + accent color in `Assets.xcassets`
 - [x] `Config/LearnWise.xcconfig` (committed) optionally includes `Secrets.xcconfig` (gitignored), so the project builds with or without a key
-- [ ] _(Mac)_ `bash setup_mac.sh`: creates `Secrets.xcconfig` from `.env` and opens Xcode
+- [ ] _(Mac)_ Copy `Secrets.example.xcconfig` → `Secrets.xcconfig`, paste your key, open `LearnWise.xcodeproj` (README → Getting Started)
 
 > **Legend:** ✍️ = written on Windows. Change it to `[x]` after it builds and its tests pass in Xcode.
 >
@@ -72,7 +72,7 @@ Students waste time searching scattered platforms (YouTube, PDFs, MOOCs, LeetCod
 - [ ] ✍️ `PromptBuilder` (system prompt, user prompt, `responseSchema`)
 - [ ] ✍️ `GeminiService` (`URLSession`, request/response DTOs, retry/backoff, error mapping)
 - [ ] ✍️ `RecommendationEngine` (primary → fallback → resolver) + `RecommendationEngineTests`
-- [ ] Try the prompt on Windows: `.\Tools\test_gemini.ps1` (needs a key)
+- [x] Prompt tested against the live Gemini API on Windows (`gemini-3.8-flash`: 10 resources, 5 steps, every field the app needs present)
 - [ ] Test with a real key on the simulator. Log the raw JSON in DEBUG builds.
 
 ### Phase 4: Results and Link Resolution ✍️
@@ -101,9 +101,9 @@ Students waste time searching scattered platforms (YouTube, PDFs, MOOCs, LeetCod
 
 ### Phase 8: Offline + Core ML ✍️
 > Moved up from "stretch": free-tier Gemini took 1.5–3 minutes and sometimes returned 503s in testing, so the offline mode keeps the demo working.
-- [x] Write `resources_catalog.json` (20 topics, 141 resources; `validate_catalog.ps1` passes and 53 of 54 URLs load. realpython.com blocks scripts but works in a browser.)
+- [x] Write `resources_catalog.json` (20 topics, 141 resources; validated, and 53 of 54 URLs load. realpython.com blocks scripts but works in a browser.)
 - [ ] ✍️ `OfflineCatalogService` keyword matching + rule-based roadmap + `OfflineCatalogServiceTests`
-- [x] Prepare `Tools/CreateML/topics_training.csv` (255 rows, ≥ 30 per label)
+- [x] Prepare `CreateML/topics_training.csv` (255 rows, ≥ 30 per label)
 - [ ] ✍️ `TopicClassifier` wrapper (Core ML or keyword rules) + `TopicClassifierTests`
 - [ ] Train `LearnWiseTopicClassifier.mlmodel` in Create ML _(Mac)_ and add it to the target (ARCHITECTURE §6.2)
 - [ ] ✍️ Wire `OfflineCatalogService` in as the engine's `fallback` in `AppEnvironment`
@@ -138,33 +138,20 @@ Development is split because no Mac is available right now.
 | Write `resources_catalog.json`, `topics_training.csv`, sample Gemini JSON | ✅ | |
 | Write the README / ARCHITECTURE / PLAN | ✅ | |
 | Test Gemini prompts and the schema (Google AI Studio in a browser, or `curl`) | ✅ | |
-| Create the `.xcodeproj` and add the files to the target | | ✅ |
-| Wire the xcconfig + Info.plist keys | | ✅ |
+| Create the `.xcodeproj`, wire the xcconfig + Info.plist keys, app icon | ✅ (XcodeGen) | |
+| Compile + unit-test the non-UI code | ✅ (Swift 6 on Linux, 64 tests pass) | |
 | Train the Core ML model in Create ML | | ✅ |
-| Build, fix compile errors, run on the simulator | | ✅ |
-| SwiftUI previews, UI tuning, app icon | | ✅ |
+| Build the SwiftUI/SwiftData code, run on the simulator | | ✅ |
+| SwiftUI previews, UI tuning | | ✅ |
 | Run XCTest / XCUITest | | ✅ |
 
 ### First Mac session, step by step
-1. **Create the project** (Phase 0), **delete the template's three Swift files**, then drag in `LearnWise/`, `LearnWiseTests/` and `LearnWiseUITests/`.
-2. **Set the deployment target to iOS 17.0** on all three targets.
-3. **Secrets:** copy `Secrets.example.xcconfig` → `Secrets.xcconfig`, paste the key from `.env`, set it as the Debug/Release configuration, and add the three Info.plist keys (README step 3).
-4. **⌘B.** Fix compile errors one file at a time, models and utilities first. The code was written without a compiler, so expect a handful of small fixes.
-5. **⌘U.** Run the unit tests. `OfflineCatalogServiceTests.testBundledCatalogLoads` confirms the catalog is in the app target.
-6. **⌘R** on an iPhone simulator. Try a real Gemini search, then Airplane Mode for the offline mode.
-7. **Create ML:** train `LearnWiseTopicClassifier.mlmodel` (ARCHITECTURE §6.2), add it, and check that Settings shows "Core ML model".
-8. **Polish:** add the app icon, check dark mode and large text, take screenshots for the README, and record the demo (README → Demo Script).
-
-**Tips for writing Swift on Windows:**
-- Install **VS Code + the Swift extension**, or the Swift toolchain for Windows (swift.org). It can syntax-check plain Swift such as models, `PromptBuilder`, and `LinkResolver`, but **not** SwiftUI, SwiftData, or Core ML.
-- Keep the pure-logic files (models, prompt, link resolver) free of `import SwiftUI` so they can be checked on Windows.
-- Test the Gemini prompt with `curl` now, so the JSON shape is settled before you reach the Mac:
-  ```bash
-  curl -s "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:generateContent" \
-    -H "x-goog-api-key: $GEMINI_API_KEY" -H "Content-Type: application/json" \
-    -d @request.json
-  ```
-- On the Mac: create the project first, then **drag the existing folders into Xcode** with "Create groups" and the target membership box checked.
+1. **Clone** the repo and add your key (README → Getting Started), then open `LearnWise.xcodeproj`.
+2. **⌘B.** The SwiftUI and SwiftData files couldn't be compiled on Windows. If Xcode reports an error, it shows the exact line.
+3. **⌘U.** Run the tests. `OfflineCatalogServiceTests.testBundledCatalogLoads` confirms the catalog is in the app target.
+4. **⌘R** on an iPhone simulator. Try a real Gemini search, then Airplane Mode for the offline mode.
+5. **Create ML** _(optional)_: train `LearnWiseTopicClassifier.mlmodel` from `CreateML/topics_training.csv` (ARCHITECTURE §6.2), drag it into `LearnWise/Resources/` (tick the LearnWise target), and check that Settings shows "Core ML model".
+6. **Polish:** check dark mode and large text, take screenshots for the README, and record the demo (README → Demo Script).
 
 ---
 

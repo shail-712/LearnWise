@@ -22,6 +22,3 @@ xcuserdata/
 .build/
 .swiftpm/
 Package.resolved
-
-# Tool output
-Tools/output/

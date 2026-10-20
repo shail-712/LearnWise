@@ -1,7 +1,6 @@
 import Foundation
 
 /// Builds the prompt and JSON schema sent to Gemini.
-/// Keep this in sync with Tools/gemini_request.json, which is used to test prompts with curl.
 enum PromptBuilder {
     static let temperature = 0.4
 
