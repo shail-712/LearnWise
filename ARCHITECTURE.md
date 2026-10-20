@@ -28,9 +28,6 @@ flowchart TD
     subgraph VM["ViewModels (@Observable)"]
         HVM[HomeViewModel]
         RVM[ResultsViewModel]
-        RMVM[RoadmapViewModel]
-        BVM[BookmarksViewModel]
-        HSVM[HistoryViewModel]
     end
 
     subgraph SVC["Services"]
@@ -50,9 +47,6 @@ flowchart TD
 
     HV -.-> HVM
     RV -.-> RVM
-    RMV -.-> RMVM
-    BV -.-> BVM
-    HSV -.-> HSVM
 
     HVM --> RE
     RE --> GS
@@ -61,12 +55,15 @@ flowchart TD
     RE --> LR
     LR --> YT
 
-    RVM --> BM
-    HVM --> SH
-    RMVM --> SR
-    BVM --> BM
-    HSVM --> SH
+    HV -- recordSearch --> SH
+    RV -- "@Query + toggleBookmark" --> BM
+    RMV -- "@Query + saveRoadmap" --> SR
+    BV -- "@Query" --> BM
+    BV -- "@Query" --> SR
+    HSV -- "@Query" --> SH
 ```
+
+> Bookmarks, History and Roadmap read SwiftData with `@Query` and write through the `ModelContext+LearnWise` helpers, so they don't need their own view models.
 
 ---
 
@@ -80,6 +77,7 @@ LearnWise/
 │   │   ├── LearnWiseApp.swift            # @main, attaches .modelContainer
 │   │   ├── RootTabView.swift             # TabView: Discover, Bookmarks, History, Settings
 │   │   ├── Route.swift                   # NavigationStack routes + .learnWiseRoutes()
+│   │   ├── AppRouter.swift               # Selected tab + "search again" handoff between tabs
 │   │   └── AppEnvironment.swift          # Dependency container (services)
 │   │
 │   ├── Config/
@@ -125,11 +123,10 @@ LearnWise/
 │   │                                     # (empty states use the built-in ContentUnavailableView)
 │   │
 │   ├── ViewModels/
-│   │   ├── HomeViewModel.swift
-│   │   ├── ResultsViewModel.swift
-│   │   ├── RoadmapViewModel.swift
-│   │   ├── BookmarksViewModel.swift
-│   │   └── HistoryViewModel.swift
+│   │   ├── HomeViewModel.swift           # Input, validation, async search, cancellation
+│   │   └── ResultsViewModel.swift        # Type filter
+│   │   # Bookmarks, History and Roadmap read SwiftData directly with @Query (the idiomatic
+│   │   # SwiftData approach); their write logic lives in ModelContext+LearnWise and is unit-tested.
 │   │
 │   ├── Services/
 │   │   ├── Protocols/
@@ -158,6 +155,7 @@ LearnWise/
 │   │   ├── ViewState.swift               # idle / loading / loaded / empty / failed
 │   │   ├── TopicText.swift               # Topic text normalising for matching
 │   │   └── Extensions/
+│   │       ├── Array+Grouping.swift      # Stable grouping for List sections
 │   │       ├── String+Trimming.swift
 │   │       └── URL+Search.swift
 │   │
@@ -173,6 +171,9 @@ LearnWise/
 │   ├── OfflineCatalogServiceTests.swift
 │   ├── TopicClassifierTests.swift
 │   ├── HomeViewModelTests.swift
+│   ├── ResultsViewModelTests.swift
+│   ├── PersistenceTests.swift            # Bookmarks, history, roadmaps on an in-memory store
+│   ├── UtilityTests.swift
 │   └── Mocks/
 │       ├── MockGeminiService.swift       # Also MockYouTubeService
 │       ├── Fixtures.swift                # Loads the sample JSON, wraps it in a Gemini envelope
@@ -549,7 +550,7 @@ enum AppError: LocalizedError, Equatable, Sendable {
 
 **Retry policy (GeminiService):** retry up to 2 times on 429/5xx/timeouts, waiting 1 s then 2 s (or the server's `Retry-After`, capped at 5 s). After that, the `RecommendationEngine` falls back to the offline catalog and shows a banner: _"Showing offline suggestions."_
 
-**UI mapping:** `LoadingView` (skeleton cards), `EmptyStateView`, and `ErrorStateView` (message + **Retry** button).
+**UI mapping:** `LoadingView` (overlay with an elapsed timer + Cancel), the system `ContentUnavailableView` for empty states, and `ErrorStateView` (message + **Retry**, shown only when retrying can help).
 
 ---
 
@@ -559,13 +560,17 @@ enum AppError: LocalizedError, Equatable, Sendable {
 RootTabView (TabView)
 ├── Discover   → NavigationStack
 │               HomeView → ResultsView → ResourceDetailView
-│                                     └→ RoadmapView
-├── Bookmarks  → NavigationStack → BookmarksView → ResourceDetailView
+│                                     └→ RoadmapView → ResourceDetailView
+├── Saved      → NavigationStack → BookmarksView ─┬ Resources → ResourceDetailView
+│                                                 └ Roadmaps  → RoadmapView (with progress)
 ├── History    → NavigationStack → HistoryView → ResultsView (from cached JSON)
-└── Settings   → SettingsView (API key status, model name, clear history, about)
+│                                  └ "Search Again" → AppRouter → Discover runs the search
+└── Settings   → SettingsView (AI status, offline status, clear data, about)
 ```
 
-- Navigation uses `NavigationStack(path:)` with `enum Route: Hashable { case results(LearningRequest, RecommendationResponse), detail(Resource, topic:) }` (roadmap is added in Phase 7). Every stack calls `.learnWiseRoutes()`, so destinations are declared once in `Route.swift`.
+- Navigation uses `NavigationStack` with `enum Route: Hashable { case results(LearningRequest, RecommendationResponse), detail(Resource, topic:), roadmap(RecommendationResponse, level:) }`. Every stack calls `.learnWiseRoutes()`, so destinations are declared once in `Route.swift`.
+- **Across tabs:** `AppRouter` (`@Observable`, in the environment) holds the selected tab and a `pendingSearch`. History sets it with `searchAgain(_:)`, and `HomeView` sees the change, fills the form and searches.
+- **Saved roadmaps:** `RoadmapView` finds its saved copy with a `@Query` filtered by topic + level, so the same screen works before saving (Save button) and after (checkboxes + progress).
 - **Links:** `RootTabView` applies `.opensLinksInApp()`, which replaces the `openURL` environment action. Every http(s) link (`Link`, `openURL(url)`, context-menu "Open") then opens in `SafariView` (`SFSafariViewController`) as a sheet, with no per-screen code. Other schemes (mailto:, tel:) go to the system.
 - **Bookmarks in lists:** `ResultsView` uses `@Query` for all bookmarks and builds a `Set` of keys, so the bookmark icons update the moment one is toggled anywhere.
 

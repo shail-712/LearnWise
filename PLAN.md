@@ -88,18 +88,19 @@ Students waste time searching scattered platforms (YouTube, PDFs, MOOCs, LeetCod
 
 ### Phase 5: Bookmarks
 - [ ] ✍️ Toggle bookmarks from `ResourceCard` and the detail screen (de-duplicated by `key`), done in Phase 4
-- [ ] `BookmarksView` using `@Query(sort: \.createdAt, order: .reverse)`, grouped by topic
-- [ ] Swipe-to-delete, empty state
+- [ ] ✍️ `BookmarksView` ("Saved" tab) using `@Query(sort: \.createdAt, order: .reverse)`, grouped by topic, searchable
+- [ ] ✍️ Swipe-to-delete, empty states; a Resources / Roadmaps segment
 
-### Phase 6: Search History
-- [ ] Save a `SearchHistoryItem` (with cached JSON) after each successful search
-- [ ] `HistoryView`: list, tap to reopen from cache, "Search again" action, swipe-to-delete, "Clear all"
+### Phase 6: Search History ✍️
+- [ ] ✍️ Save a `SearchHistoryItem` (with cached JSON) after each successful search (duplicates replaced, max 50)
+- [ ] ✍️ `HistoryView`: list, tap to reopen from cache (instant, no Gemini call), "Search Again" swipe → Discover via `AppRouter`, swipe-to-delete, "Clear" with confirmation
 
-### Phase 7: Learning Roadmap
-- [ ] `RoadmapView`: vertical timeline of `RoadmapStepRow`s with linked resources
-- [ ] Total estimated hours in the header
-- [ ] "Save Roadmap" → `SavedRoadmap`
-- [ ] _(Stretch)_ checkboxes for completed steps + a progress bar
+### Phase 7: Learning Roadmap ✍️
+- [ ] ✍️ `RoadmapView`: vertical timeline of `RoadmapStepRow`s with linked resources
+- [ ] ✍️ Total estimated hours in the header
+- [ ] ✍️ "Save Roadmap" → `SavedRoadmap` (one per topic + level)
+- [ ] ✍️ Checkboxes for completed steps + a progress bar (after saving)
+- [ ] ✍️ Share the roadmap as text (`ShareLink`)
 
 ### Phase 8: Offline + Core ML ✍️
 > Moved up from "stretch": free-tier Gemini took 1.5–3 minutes and sometimes returned 503s in testing, so the offline mode keeps the demo working.
@@ -108,20 +109,22 @@ Students waste time searching scattered platforms (YouTube, PDFs, MOOCs, LeetCod
 - [x] Prepare `Tools/CreateML/topics_training.csv` (255 rows, ≥ 30 per label)
 - [ ] ✍️ `TopicClassifier` wrapper (Core ML or keyword rules) + `TopicClassifierTests`
 - [ ] Train `LearnWiseTopicClassifier.mlmodel` in Create ML _(Mac)_ and add it to the target (ARCHITECTURE §6.2)
-- [ ] Wire `OfflineCatalogService` in as the engine's `fallback` in `AppEnvironment` (Phase 2)
-- [ ] Offline banner in `ResultsView`
+- [ ] ✍️ Wire `OfflineCatalogService` in as the engine's `fallback` in `AppEnvironment`
+- [ ] ✍️ Offline banner in `ResultsView`
 
 ### Phase 9: Polish and Testing
-- [ ] App icon + accent color
-- [ ] Dark mode check, Dynamic Type, VoiceOver labels
-- [ ] Haptics on bookmark
-- [ ] `SettingsView` (key status, model name, clear data, about)
-- [ ] Unit tests ≥ 70% coverage on Services/ViewModels
-- [ ] UI test for the main flow, using the `-UITestMockAI` launch argument
-- [ ] Screenshots for the README
+- [ ] App icon + accent color _(Mac: Assets.xcassets → AppIcon, one 1024×1024 PNG)_
+- [ ] ✍️ System colors and materials only (dark mode should just work), Dynamic Type fonts, VoiceOver labels on icon buttons and roadmap steps
+- [ ] Check dark mode, the largest Dynamic Type size and VoiceOver in the simulator _(Mac)_
+- [ ] ✍️ Haptics on bookmark and step completion (`.sensoryFeedback`)
+- [ ] ✍️ `SettingsView` (key status, model, offline catalog + classifier status, clear data per type, about)
+- [ ] Unit tests: ~75 written across Models, Services, ViewModels and Persistence. Check coverage in Xcode _(Mac)_.
+- [ ] ✍️ UI tests for the main flows (search, detail + bookmark, roadmap save, history) with `-UITestMockAI`
+- [ ] Screenshots for the README _(Mac)_
 
 ### Phase 10: Submission
-- [ ] Final README with screenshots
+- [ ] ✍️ README updated with final features, architecture summary and the demo script
+- [ ] Add screenshots to the README _(Mac)_
 - [ ] Demo video (screen recording from the simulator)
 - [ ] Project report / PPT
 - [ ] Push to GitHub
@@ -144,6 +147,16 @@ Development is split because no Mac is available right now.
 | Build, fix compile errors, run on the simulator | | ✅ |
 | SwiftUI previews, UI tuning, app icon | | ✅ |
 | Run XCTest / XCUITest | | ✅ |
+
+### First Mac session, step by step
+1. **Create the project** (Phase 0), **delete the template's three Swift files**, then drag in `LearnWise/`, `LearnWiseTests/` and `LearnWiseUITests/`.
+2. **Set the deployment target to iOS 17.0** on all three targets.
+3. **Secrets:** copy `Secrets.example.xcconfig` → `Secrets.xcconfig`, paste the key from `.env`, set it as the Debug/Release configuration, and add the three Info.plist keys (README step 3).
+4. **⌘B.** Fix compile errors one file at a time, models and utilities first. The code was written without a compiler, so expect a handful of small fixes.
+5. **⌘U.** Run the unit tests. `OfflineCatalogServiceTests.testBundledCatalogLoads` confirms the catalog is in the app target.
+6. **⌘R** on an iPhone simulator. Try a real Gemini search, then Airplane Mode for the offline mode.
+7. **Create ML:** train `LearnWiseTopicClassifier.mlmodel` (ARCHITECTURE §6.2), add it, and check that Settings shows "Core ML model".
+8. **Polish:** add the app icon, check dark mode and large text, take screenshots for the README, and record the demo (README → Demo Script).
 
 **Tips for writing Swift on Windows:**
 - Install **VS Code + the Swift extension**, or the Swift toolchain for Windows (swift.org). It can syntax-check plain Swift such as models, `PromptBuilder`, and `LinkResolver`, but **not** SwiftUI, SwiftData, or Core ML.

@@ -21,6 +21,24 @@ struct ResultsView: View {
         List {
             Section {
                 ResultsHeader(request: viewModel.request, response: response)
+
+                if !response.roadmap.isEmpty {
+                    NavigationLink(value: Route.roadmap(response, level: viewModel.request.level)) {
+                        Label {
+                            VStack(alignment: .leading, spacing: 2) {
+                                Text("View Learning Roadmap")
+                                    .font(.headline)
+                                Text("\(response.roadmap.count) steps · ~\(RoadmapStep.hoursText(response.totalRoadmapHours))")
+                                    .font(.caption)
+                                    .foregroundStyle(.secondary)
+                            }
+                        } icon: {
+                            Image(systemName: "map.fill")
+                                .foregroundStyle(.tint)
+                        }
+                    }
+                    .accessibilityIdentifier("roadmapLink")
+                }
             }
 
             if viewModel.filterTypes.count > 1 {

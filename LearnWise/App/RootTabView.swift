@@ -6,16 +6,16 @@ enum AppTab: Hashable {
 
 struct RootTabView: View {
     @Environment(AppEnvironment.self) private var environment
-    @State private var selection: AppTab = .discover
+    @State private var router = AppRouter()
 
     var body: some View {
-        TabView(selection: $selection) {
+        TabView(selection: $router.selectedTab) {
             HomeView(provider: environment.recommendationEngine)
                 .tabItem { Label("Discover", systemImage: "magnifyingglass") }
                 .tag(AppTab.discover)
 
             BookmarksView()
-                .tabItem { Label("Bookmarks", systemImage: "bookmark") }
+                .tabItem { Label("Saved", systemImage: "bookmark") }
                 .tag(AppTab.bookmarks)
 
             HistoryView()
@@ -26,6 +26,7 @@ struct RootTabView: View {
                 .tabItem { Label("Settings", systemImage: "gearshape") }
                 .tag(AppTab.settings)
         }
+        .environment(router)
         .opensLinksInApp()
     }
 }

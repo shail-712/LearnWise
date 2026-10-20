@@ -86,6 +86,39 @@ final class PersistenceTests: XCTestCase {
 
     // MARK: Roadmaps
 
+    func testSaveRoadmapTwiceKeepsOneCopy() {
+        let first = context.saveRoadmap(SampleData.response, level: .beginner)
+        let second = context.saveRoadmap(SampleData.response, level: .beginner)
+
+        XCTAssertTrue(first === second)
+        XCTAssertEqual(count(SavedRoadmap.self), 1)
+        XCTAssertNotNil(context.savedRoadmap(topic: SampleData.response.topic, level: .beginner))
+        XCTAssertNil(context.savedRoadmap(topic: SampleData.response.topic, level: .advanced))
+    }
+
+    func testSavedRoadmapKeepsResourceLinks() throws {
+        let roadmap = context.saveRoadmap(SampleData.response, level: .beginner)
+        let response = try XCTUnwrap(roadmap.response)
+        let step = try XCTUnwrap(response.roadmap.first)
+
+        XCTAssertFalse(response.resources(for: step).isEmpty)
+    }
+
+    func testClearingData() throws {
+        context.toggleBookmark(SampleData.resources[0], topic: "DP")
+        context.recordSearch(SampleData.request, response: SampleData.response)
+        context.saveRoadmap(SampleData.response, level: .beginner)
+        try context.save()
+
+        context.clearBookmarks()
+        context.clearHistory()
+        context.clearSavedRoadmaps()
+
+        XCTAssertEqual(count(BookmarkedResource.self), 0)
+        XCTAssertEqual(count(SearchHistoryItem.self), 0)
+        XCTAssertEqual(count(SavedRoadmap.self), 0)
+    }
+
     func testSavedRoadmapTracksProgress() throws {
         let roadmap = SavedRoadmap(response: SampleData.response, level: .beginner)
         context.insert(roadmap)

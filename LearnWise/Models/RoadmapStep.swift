@@ -27,6 +27,22 @@ struct RoadmapStep: Codable, Identifiable, Hashable, Sendable {
 }
 
 extension RoadmapStep {
+    var durationText: String { Self.hoursText(estimatedHours) }
+
+    /// 0.5 → "30 min", 3 → "3 h", 2.5 → "2.5 h".
+    static func hoursText(_ hours: Double) -> String {
+        guard hours > 0 else { return "—" }
+        if hours < 1 {
+            return "\(Int((hours * 60).rounded())) min"
+        }
+        if hours.rounded() == hours {
+            return "\(Int(hours)) h"
+        }
+        return String(format: "%.1f h", hours)
+    }
+}
+
+extension RoadmapStep {
     enum CodingKeys: String, CodingKey {
         case id, order, title, summary, resourceTitles, estimatedHours
     }

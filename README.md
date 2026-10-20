@@ -16,17 +16,52 @@
 |---|---|
 | 🔍 **Smart Recommendations** | Enter a topic, a skill level (Beginner / Intermediate / Advanced), and an optional goal (e.g. "crack FAANG interviews", "university exam"). Gemini returns resources picked for that input. |
 | 🗂 **Multi-type Resources** | Results are grouped into **YouTube Videos**, **PDFs**, **Courses**, **LeetCode Problems**, and **Notes / Articles**. |
-| 🧭 **Learning Roadmap** | Turns the recommendations into an ordered path (Step 1 → Step N) with an estimated time for each step. |
-| 🔖 **Bookmarks** | Save any resource. Bookmarks are stored on the device with SwiftData. |
-| 🕘 **Search History** | Past searches are saved so you can re-run one with a single tap. |
-| 📴 **Offline Fallback** | If there's no network or API key, a bundled resource catalog and an optional Core ML topic classifier still return results. |
-| 🌗 **Dark Mode & Accessibility** | Supports Dynamic Type, VoiceOver labels, and light/dark themes. |
+| 🧭 **Learning Roadmap** | Turns the recommendations into an ordered path (Step 1 → Step N) with time estimates. Save it to tick off steps and track progress, or share it as text. |
+| 🔖 **Saved** | Bookmark any resource, grouped by topic and searchable, alongside your saved roadmaps. Stored on the device with SwiftData. |
+| 🕘 **Search History** | Past searches reopen **instantly** from a local cache, with no AI wait. Swipe to search again. |
+| 🛡 **Safe Links** | AI-suggested URLs are only used if they're HTTPS and on a trusted domain. Otherwise LearnWise builds a search link and says so. |
+| 🌐 **In-App Browser** | Every link opens in Safari inside the app (`SFSafariViewController`). |
+| 📴 **Offline Fallback** | With no network, no API key or a rate limit, a hand-picked catalog (20 topics, 141 resources) and an optional Core ML topic classifier still return results. |
+| 🌗 **Dark Mode & Accessibility** | System colors, Dynamic Type, VoiceOver labels and haptics. |
+
+## 🧠 How It Works
+
+```
+Topic + level + goal
+      │
+      ▼
+RecommendationEngine ──► GeminiService (structured JSON via responseSchema)
+      │                      │ fails? (offline, 429, no key)
+      │                      ▼
+      │                 OfflineCatalogService ──► TopicClassifier (Core ML / keyword rules)
+      ▼
+LinkResolver (allow-list or safe search links)
+      ▼
+Results ─► Roadmap ─► Saved / History (SwiftData)
+```
+Full details are in **[ARCHITECTURE.md](ARCHITECTURE.md)**.
+
+## 🎬 Demo Script (≈ 3 minutes)
+
+1. **Discover:** tap the *Dynamic Programming* chip, choose *Beginner*, type the goal "Coding interviews", then tap **Get Recommendations**. Point out the elapsed timer and the Cancel button.
+2. **Results:** show the type filter chips, bookmark *Climbing Stairs*, and open a card to show the detail screen and the in-app browser.
+3. **Roadmap:** tap *View Learning Roadmap*, then **Save Roadmap**, then tick step 1. The progress bar moves.
+4. **Saved tab:** show the bookmark and the saved roadmap with its progress.
+5. **History:** reopen the search. It loads instantly from the cache.
+6. **Offline:** turn on Airplane Mode and search "trees". You get offline suggestions, with the banner.
+7. **Settings:** show the AI status, offline catalog and classifier status, and clearing data.
+
+> Free-tier Gemini can take 1.5–3 minutes. For a live demo, run the first search before presenting, then use **History** to reopen it instantly.
+
+## 📌 Status
+
+All source code for Phases 1–10 has been written, and the tests are in place: about 75 unit tests and 6 UI tests. The project was written on Windows, so the Mac-only steps are still to do: create the Xcode project, build, train the Core ML model, add the app icon and take screenshots. See **[PLAN.md](PLAN.md)** for the checklist.
 
 ## 📸 Screenshots
 
 > _To be added after running on the iOS Simulator._
 
-| Discover | Results | Roadmap | Bookmarks |
+| Discover | Results | Roadmap | Saved |
 |---|---|---|---|
 | _screenshot_ | _screenshot_ | _screenshot_ | _screenshot_ |
 
@@ -107,9 +142,9 @@ xcodebuild test -scheme LearnWise -destination 'platform=iOS Simulator,name=iPho
 3. Pick your **skill level**: Beginner / Intermediate / Advanced.
 4. _(Optional)_ Enter a **goal**, e.g. `Prepare for coding interviews in 4 weeks`.
 5. Tap **Get Recommendations**.
-6. Browse resources grouped by type. Tap one to open it, or tap 🔖 to bookmark it.
-7. Tap **View Roadmap** to see an ordered learning path, and **Save Roadmap** to keep it.
-8. Find old searches in **History** and saved items in **Bookmarks**.
+6. Browse resources grouped by type, and filter with the chips. Tap a card for details, or tap 🔖 to bookmark it.
+7. Tap **View Learning Roadmap** to see an ordered path. **Save Roadmap** lets you tick off steps.
+8. Find bookmarks and roadmaps in **Saved**, and old searches in **History**. Swipe a search to run it again.
 
 ---
 

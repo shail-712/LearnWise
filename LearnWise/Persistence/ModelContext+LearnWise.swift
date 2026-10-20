@@ -60,4 +60,37 @@ extension ModelContext {
     func clearHistory() {
         try? delete(model: SearchHistoryItem.self)
     }
+
+    // MARK: Saved roadmaps
+
+    func savedRoadmap(topic: String, level: SkillLevel) -> SavedRoadmap? {
+        let levelRaw = level.rawValue
+        var descriptor = FetchDescriptor<SavedRoadmap>(
+            predicate: #Predicate<SavedRoadmap> { $0.topic == topic && $0.levelRaw == levelRaw },
+            sortBy: [SortDescriptor(\.createdAt, order: .reverse)]
+        )
+        descriptor.fetchLimit = 1
+        return (try? fetch(descriptor))?.first
+    }
+
+    /// Saves the roadmap, or returns the one already saved for this topic and level.
+    @discardableResult
+    func saveRoadmap(_ response: RecommendationResponse, level: SkillLevel) -> SavedRoadmap {
+        if let existing = savedRoadmap(topic: response.topic, level: level) {
+            return existing
+        }
+        let roadmap = SavedRoadmap(response: response, level: level)
+        insert(roadmap)
+        return roadmap
+    }
+
+    // MARK: Clearing data (Settings)
+
+    func clearBookmarks() {
+        try? delete(model: BookmarkedResource.self)
+    }
+
+    func clearSavedRoadmaps() {
+        try? delete(model: SavedRoadmap.self)
+    }
 }

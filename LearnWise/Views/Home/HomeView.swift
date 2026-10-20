@@ -3,6 +3,7 @@ import SwiftUI
 
 struct HomeView: View {
     @Environment(\.modelContext) private var modelContext
+    @Environment(AppRouter.self) private var router
     @State private var viewModel: HomeViewModel
     @State private var path: [Route] = []
     @FocusState private var focusedField: Field?
@@ -101,8 +102,23 @@ struct HomeView: View {
             .onChange(of: viewModel.topic) {
                 viewModel.dismissError()
             }
+            .onChange(of: router.pendingSearch) {
+                runPendingSearch()
+            }
+            .onAppear {
+                runPendingSearch()
+            }
             .learnWiseRoutes()
         }
+    }
+
+    /// Handles "Search again" from History.
+    private func runPendingSearch() {
+        guard let request = router.pendingSearch else { return }
+        router.pendingSearch = nil
+        path.removeAll()
+        viewModel.prefill(from: request)
+        search()
     }
 
     private func search() {
@@ -135,5 +151,6 @@ private struct SuggestedTopicsRow: View {
 
 #Preview {
     HomeView(provider: SampleRecommendationProvider())
+        .environment(AppRouter())
         .modelContainer(PersistenceController.preview)
 }
