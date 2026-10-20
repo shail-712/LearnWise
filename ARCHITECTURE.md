@@ -79,6 +79,7 @@ LearnWise/
 │   ├── App/
 │   │   ├── LearnWiseApp.swift            # @main, attaches .modelContainer
 │   │   ├── RootTabView.swift             # TabView: Discover, Bookmarks, History, Settings
+│   │   ├── Route.swift                   # NavigationStack routes + .learnWiseRoutes()
 │   │   └── AppEnvironment.swift          # Dependency container (services)
 │   │
 │   ├── Config/
@@ -117,12 +118,11 @@ LearnWise/
 │   │   ├── Settings/
 │   │   │   └── SettingsView.swift
 │   │   └── Components/
-│   │       ├── ResourceCard.swift
-│   │       ├── ResourceTypeBadge.swift
-│   │       ├── LoadingView.swift
+│   │       ├── ResourceCard.swift        # Also DifficultyBadge
+│   │       ├── LoadingView.swift         # Overlay with elapsed timer + Cancel
 │   │       ├── ErrorStateView.swift
-│   │       ├── EmptyStateView.swift
 │   │       └── SafariView.swift          # UIViewControllerRepresentable for SFSafariViewController
+│   │                                     # (empty states use the built-in ContentUnavailableView)
 │   │
 │   ├── ViewModels/
 │   │   ├── HomeViewModel.swift
@@ -142,6 +142,7 @@ LearnWise/
 │   │   │   └── PromptBuilder.swift       # Prompt + JSON schema
 │   │   ├── LinkResolver.swift
 │   │   ├── YouTubeService.swift          # Optional, YouTube Data API v3
+│   │   ├── SampleRecommendationProvider.swift  # Sample data for previews and UI tests
 │   │   ├── OfflineCatalogService.swift   # Also CatalogEntry; matching, picking, rule-based roadmap
 │   │   └── TopicClassifier.swift         # Core ML model or keyword rules; TopicClassifying protocol
 │   │
@@ -154,6 +155,7 @@ LearnWise/
 │   │   ├── AppError.swift
 │   │   ├── Constants.swift               # Endpoints, limits, link allow-lists
 │   │   ├── JSONValue.swift               # Encodes Gemini's responseSchema
+│   │   ├── ViewState.swift               # idle / loading / loaded / empty / failed
 │   │   ├── TopicText.swift               # Topic text normalising for matching
 │   │   └── Extensions/
 │   │       ├── String+Trimming.swift
@@ -573,19 +575,24 @@ RootTabView (TabView)
 `AppEnvironment` builds the services once and passes them down with `.environment(...)`:
 
 ```swift
-@Observable final class AppEnvironment {
-    let recommendationEngine: RecommendationProviding
-    init(config: AppConfig = .live) {
-        let gemini  = GeminiService(apiKey: config.geminiKey, model: config.geminiModel)
-        let offline = OfflineCatalogService(classifier: TopicClassifier())
-        let links   = LinkResolver(youtube: config.youtubeKey.map(YouTubeService.init))
-        recommendationEngine = RecommendationEngine(primary: gemini, fallback: offline, resolver: links)
+@MainActor @Observable final class AppEnvironment {
+    let config: AppConfig
+    let recommendationEngine: any RecommendationProviding
+
+    init(config: AppConfig = .live, useSampleData: Bool = false) {
+        // primary = SampleRecommendationProvider() when useSampleData, else GeminiService
+        recommendationEngine = RecommendationEngine(
+            primary: primary,
+            fallback: OfflineCatalogService(),
+            resolver: LinkResolver(youtube: config.youtubeKey.map { YouTubeService(apiKey: $0) })
+        )
     }
-    static let preview = AppEnvironment(config: .mock)
+    static func forLaunch() -> AppEnvironment   // sample data when launched with -UITestMockAI
+    static let preview = AppEnvironment(config: .mock, useSampleData: true)
 }
 ```
 
-SwiftData's `ModelContext` comes from `@Environment(\.modelContext)` in Views. It is passed into ViewModels that need to write.
+SwiftData's `ModelContext` comes from `@Environment(\.modelContext)` in Views. ViewModels stay free of SwiftData: `HomeView` records the search with `modelContext.recordSearch(_:response:)` in the success callback it passes to `HomeViewModel.search(onSuccess:)`.
 
 ---
 

@@ -42,7 +42,9 @@ Students waste time searching scattered platforms (YouTube, PDFs, MOOCs, LeetCod
 ### Phase 0: Project Setup _(Mac)_
 - [ ] Xcode → File → New → Project → iOS **App** → name `LearnWise`, Interface **SwiftUI**, Storage **SwiftData**, include tests
 - [ ] Set the deployment target to **iOS 17.0**
-- [ ] Create the folder groups from [ARCHITECTURE.md §2](ARCHITECTURE.md#2-xcode-project-structure)
+- [ ] **Delete the template's `LearnWiseApp.swift`, `ContentView.swift` and `Item.swift`.** Ours replace them; keeping both gives a duplicate `@main` error.
+- [ ] Drag the existing `LearnWise/`, `LearnWiseTests/` and `LearnWiseUITests/` folders into Xcode ("Create groups", tick the matching target). Leave `Tools/` out of every target.
+- [ ] Check target membership: `resources_catalog.json` → LearnWise; `gemini_sample_response.json` → LearnWiseTests
 - [x] Add `Config/Secrets.example.xcconfig` and `.gitignore`
 - [ ] Copy it to `Secrets.xcconfig` and add your key
 - [ ] Wire the xcconfig to the build configurations and add the Info.plist keys
@@ -57,11 +59,16 @@ Students waste time searching scattered platforms (YouTube, PDFs, MOOCs, LeetCod
 - [ ] ✍️ `SampleData` for SwiftUI previews
 - [ ] ✍️ Unit test: decode `gemini_sample_response.json` (`RecommendationDecodingTests`)
 
-### Phase 2: Home / Input UI
-- [ ] `RootTabView` with 4 tabs
-- [ ] `HomeView`: topic `TextField`, segmented `SkillLevelPicker`, goal `TextField`, primary button
-- [ ] Suggested topic chips (e.g. "DSA", "SwiftUI", "Machine Learning")
-- [ ] `HomeViewModel` with validation + `ViewState`
+### Phase 2: Home / Input UI ✍️
+- [ ] ✍️ `LearnWiseApp` + `AppEnvironment` (Gemini → offline fallback → LinkResolver; `-UITestMockAI` uses sample data and an in-memory store)
+- [ ] ✍️ `RootTabView` with 4 tabs (Bookmarks/History are placeholders until Phases 5–6; Settings shows key status)
+- [ ] ✍️ `HomeView`: topic `TextField`, segmented `SkillLevelPicker`, goal `TextField`, primary button
+- [ ] ✍️ Suggested topic chips
+- [ ] ✍️ `LoadingView` with elapsed timer + Cancel (free-tier Gemini takes 1.5–3 min), `ErrorStateView` with Retry
+- [ ] ✍️ `HomeViewModel` with validation, `ViewState`, cancellation + `HomeViewModelTests`
+- [ ] ✍️ Searches are saved to history; a basic `ResultsView` + `ResourceCard` show the results (Phase 4 extends them)
+- [ ] ✍️ `RecommendationFlowUITests` (search → results, suggestion chips)
+- [ ] Check in the simulator: layout, dark mode, keyboard behaviour
 
 ### Phase 3: Gemini Integration ✍️
 - [ ] ✍️ `AppConfig` reads the keys from the Info.plist
