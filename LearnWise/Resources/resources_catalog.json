@@ -1,0 +1,283 @@
+[
+  {
+    "topic": "Data Structures",
+    "category": "DSA",
+    "keywords": ["data structures", "dsa", "arrays", "linked list", "stack", "queue", "hash table", "hashing", "heap", "data structures and algorithms", "algorithms"],
+    "resources": [
+      { "title": "Data Structures Easy to Advanced Course", "type": "video", "description": "William Fiset's full course covering arrays, linked lists, stacks, queues, heaps, hash tables and more.", "source": "freeCodeCamp (YouTube)", "difficulty": "beginner", "estimatedMinutes": 480, "searchQuery": "freeCodeCamp data structures easy to advanced course William Fiset" },
+      { "title": "Data Structures Playlist", "type": "video", "description": "Short, clear whiteboard explanations of core data structures with C/C++ code.", "source": "mycodeschool (YouTube)", "difficulty": "beginner", "estimatedMinutes": 600, "searchQuery": "mycodeschool data structures playlist" },
+      { "title": "Open Data Structures", "type": "pdf", "description": "A free textbook that analyses each data structure's implementation and running time.", "source": "Pat Morin", "difficulty": "intermediate", "estimatedMinutes": 900, "url": "https://opendatastructures.org/", "searchQuery": "Open Data Structures Pat Morin pdf" },
+      { "title": "Data Structures and Algorithms Specialization", "type": "course", "description": "UC San Diego's six-course series with programming assignments, from basics to advanced algorithms.", "source": "Coursera", "difficulty": "intermediate", "estimatedMinutes": 6000, "url": "https://www.coursera.org/specializations/data-structures-algorithms", "searchQuery": "UC San Diego data structures and algorithms specialization coursera" },
+      { "title": "Data Structures Tutorial", "type": "notes", "description": "Short articles with code for every common data structure.", "source": "GeeksforGeeks", "difficulty": "beginner", "estimatedMinutes": 60, "searchQuery": "geeksforgeeks data structures tutorial" },
+      { "title": "Two Sum", "type": "leetcode", "description": "Use a hash map to find two numbers that add up to a target.", "source": "LeetCode", "difficulty": "beginner", "estimatedMinutes": 20, "searchQuery": "two sum", "leetcodeSlug": "two-sum" },
+      { "title": "Valid Parentheses", "type": "leetcode", "description": "A classic stack problem: check that brackets are balanced.", "source": "LeetCode", "difficulty": "beginner", "estimatedMinutes": 20, "searchQuery": "valid parentheses", "leetcodeSlug": "valid-parentheses" },
+      { "title": "Reverse Linked List", "type": "leetcode", "description": "Reverse a singly linked list iteratively and recursively.", "source": "LeetCode", "difficulty": "beginner", "estimatedMinutes": 20, "searchQuery": "reverse linked list", "leetcodeSlug": "reverse-linked-list" },
+      { "title": "LRU Cache", "type": "leetcode", "description": "Combine a hash map and a doubly linked list for O(1) get and put.", "source": "LeetCode", "difficulty": "advanced", "estimatedMinutes": 45, "searchQuery": "lru cache", "leetcodeSlug": "lru-cache" }
+    ]
+  },
+  {
+    "topic": "Dynamic Programming",
+    "category": "DSA",
+    "keywords": ["dynamic programming", "dp", "memoization", "tabulation", "knapsack", "longest common subsequence"],
+    "resources": [
+      { "title": "Dynamic Programming - Learn to Solve Algorithmic Problems & Coding Challenges", "type": "video", "description": "Alvin Zablan's 5-hour course on memoization and tabulation through classic problems.", "source": "freeCodeCamp (YouTube)", "difficulty": "beginner", "estimatedMinutes": 300, "searchQuery": "freeCodeCamp dynamic programming learn to solve algorithmic problems" },
+      { "title": "MIT 6.006 Dynamic Programming Lectures", "type": "video", "description": "Erik Demaine's lectures introducing the SRTBOT framework for designing DP algorithms.", "source": "MIT OpenCourseWare (YouTube)", "difficulty": "intermediate", "estimatedMinutes": 200, "searchQuery": "MIT 6.006 dynamic programming lecture Erik Demaine" },
+      { "title": "Algorithms by Jeff Erickson: Dynamic Programming", "type": "pdf", "description": "A free textbook chapter with rigorous explanations and many exercises.", "source": "University of Illinois", "difficulty": "advanced", "estimatedMinutes": 180, "url": "https://jeffe.cs.illinois.edu/teaching/algorithms/", "searchQuery": "Jeff Erickson algorithms dynamic programming chapter pdf" },
+      { "title": "Algorithms Specialization", "type": "course", "description": "Stanford's course on Coursera; Part 3 covers greedy algorithms and dynamic programming.", "source": "Coursera", "difficulty": "intermediate", "estimatedMinutes": 3600, "url": "https://www.coursera.org/specializations/algorithms", "searchQuery": "Stanford algorithms specialization coursera" },
+      { "title": "Introduction to Dynamic Programming", "type": "notes", "description": "Explains overlapping subproblems and optimal substructure with examples.", "source": "GeeksforGeeks", "difficulty": "beginner", "estimatedMinutes": 20, "searchQuery": "geeksforgeeks introduction to dynamic programming" },
+      { "title": "Climbing Stairs", "type": "leetcode", "description": "The classic first DP problem: count the ways to reach the top.", "source": "LeetCode", "difficulty": "beginner", "estimatedMinutes": 20, "searchQuery": "climbing stairs", "leetcodeSlug": "climbing-stairs" },
+      { "title": "House Robber", "type": "leetcode", "description": "Choose non-adjacent houses to maximise the total; introduces include/exclude states.", "source": "LeetCode", "difficulty": "intermediate", "estimatedMinutes": 30, "searchQuery": "house robber", "leetcodeSlug": "house-robber" },
+      { "title": "Coin Change", "type": "leetcode", "description": "Unbounded-knapsack-style DP to find the fewest coins for an amount.", "source": "LeetCode", "difficulty": "intermediate", "estimatedMinutes": 40, "searchQuery": "coin change", "leetcodeSlug": "coin-change" },
+      { "title": "Longest Common Subsequence", "type": "leetcode", "description": "The standard 2-D DP table problem on two strings.", "source": "LeetCode", "difficulty": "intermediate", "estimatedMinutes": 40, "searchQuery": "longest common subsequence", "leetcodeSlug": "longest-common-subsequence" },
+      { "title": "Edit Distance", "type": "leetcode", "description": "Minimum insertions, deletions and replacements to turn one word into another.", "source": "LeetCode", "difficulty": "advanced", "estimatedMinutes": 45, "searchQuery": "edit distance", "leetcodeSlug": "edit-distance" }
+    ]
+  },
+  {
+    "topic": "Graph Algorithms",
+    "category": "DSA",
+    "keywords": ["graph", "graphs", "graph theory", "bfs", "dfs", "breadth first search", "depth first search", "dijkstra", "shortest path", "topological sort", "minimum spanning tree"],
+    "resources": [
+      { "title": "BFS and DFS Graph Traversals", "type": "video", "description": "Abdul Bari's clear walkthrough of breadth-first and depth-first search.", "source": "Abdul Bari (YouTube)", "difficulty": "beginner", "estimatedMinutes": 20, "searchQuery": "Abdul Bari BFS DFS graph traversal" },
+      { "title": "Graph Theory Algorithms Course", "type": "video", "description": "William Fiset's full course: shortest paths, topological sort, MSTs, network flow and more.", "source": "freeCodeCamp (YouTube)", "difficulty": "intermediate", "estimatedMinutes": 420, "searchQuery": "freeCodeCamp graph theory algorithms course William Fiset" },
+      { "title": "Breadth-First Search", "type": "notes", "description": "Concise competitive-programming reference with C++ code and applications.", "source": "cp-algorithms", "difficulty": "intermediate", "estimatedMinutes": 20, "url": "https://cp-algorithms.com/graph/breadth-first-search.html", "searchQuery": "cp-algorithms breadth first search" },
+      { "title": "Graph Data Structure and Algorithms", "type": "notes", "description": "Articles on graph representation, traversals and classic algorithms.", "source": "GeeksforGeeks", "difficulty": "beginner", "estimatedMinutes": 45, "searchQuery": "geeksforgeeks graph data structure and algorithms" },
+      { "title": "Algorithms by Jeff Erickson: Graph Chapters", "type": "pdf", "description": "Free textbook chapters on search, shortest paths and minimum spanning trees.", "source": "University of Illinois", "difficulty": "advanced", "estimatedMinutes": 240, "url": "https://jeffe.cs.illinois.edu/teaching/algorithms/", "searchQuery": "Jeff Erickson algorithms graphs chapter pdf" },
+      { "title": "Find if Path Exists in Graph", "type": "leetcode", "description": "A gentle first BFS/DFS or union-find problem.", "source": "LeetCode", "difficulty": "beginner", "estimatedMinutes": 20, "searchQuery": "find if path exists in graph", "leetcodeSlug": "find-if-path-exists-in-graph" },
+      { "title": "Number of Islands", "type": "leetcode", "description": "Flood-fill a grid with DFS or BFS to count connected components.", "source": "LeetCode", "difficulty": "intermediate", "estimatedMinutes": 30, "searchQuery": "number of islands", "leetcodeSlug": "number-of-islands" },
+      { "title": "Course Schedule", "type": "leetcode", "description": "Detect a cycle in a directed graph using topological sort.", "source": "LeetCode", "difficulty": "intermediate", "estimatedMinutes": 35, "searchQuery": "course schedule", "leetcodeSlug": "course-schedule" },
+      { "title": "Network Delay Time", "type": "leetcode", "description": "Apply Dijkstra's algorithm to find the time for a signal to reach all nodes.", "source": "LeetCode", "difficulty": "advanced", "estimatedMinutes": 40, "searchQuery": "network delay time", "leetcodeSlug": "network-delay-time" }
+    ]
+  },
+  {
+    "topic": "Trees",
+    "category": "DSA",
+    "keywords": ["tree", "trees", "binary tree", "binary search tree", "bst", "tree traversal", "inorder", "avl tree", "segment tree", "trie"],
+    "resources": [
+      { "title": "Binary Tree Algorithms for Technical Interviews", "type": "video", "description": "Alvin Zablan's course on traversals, depth-first and breadth-first tree problems.", "source": "freeCodeCamp (YouTube)", "difficulty": "beginner", "estimatedMinutes": 120, "searchQuery": "freeCodeCamp binary tree algorithms for technical interviews" },
+      { "title": "Binary Search Tree Lessons", "type": "video", "description": "Step-by-step BST insertion, search, deletion and traversal.", "source": "mycodeschool (YouTube)", "difficulty": "beginner", "estimatedMinutes": 120, "searchQuery": "mycodeschool binary search tree" },
+      { "title": "Binary Tree Data Structure", "type": "notes", "description": "Articles on tree types, traversals and common operations.", "source": "GeeksforGeeks", "difficulty": "beginner", "estimatedMinutes": 40, "searchQuery": "geeksforgeeks binary tree data structure" },
+      { "title": "Open Data Structures: Trees Chapters", "type": "pdf", "description": "Free textbook chapters on binary trees, BSTs, treaps and red-black trees.", "source": "Pat Morin", "difficulty": "advanced", "estimatedMinutes": 240, "url": "https://opendatastructures.org/", "searchQuery": "Open Data Structures binary search trees chapter" },
+      { "title": "Maximum Depth of Binary Tree", "type": "leetcode", "description": "The simplest recursive tree problem.", "source": "LeetCode", "difficulty": "beginner", "estimatedMinutes": 15, "searchQuery": "maximum depth of binary tree", "leetcodeSlug": "maximum-depth-of-binary-tree" },
+      { "title": "Invert Binary Tree", "type": "leetcode", "description": "Swap the left and right children of every node.", "source": "LeetCode", "difficulty": "beginner", "estimatedMinutes": 15, "searchQuery": "invert binary tree", "leetcodeSlug": "invert-binary-tree" },
+      { "title": "Binary Tree Level Order Traversal", "type": "leetcode", "description": "Use a queue to visit the tree level by level.", "source": "LeetCode", "difficulty": "intermediate", "estimatedMinutes": 25, "searchQuery": "binary tree level order traversal", "leetcodeSlug": "binary-tree-level-order-traversal" },
+      { "title": "Validate Binary Search Tree", "type": "leetcode", "description": "Check the BST property with min/max bounds.", "source": "LeetCode", "difficulty": "intermediate", "estimatedMinutes": 30, "searchQuery": "validate binary search tree", "leetcodeSlug": "validate-binary-search-tree" },
+      { "title": "Serialize and Deserialize Binary Tree", "type": "leetcode", "description": "Design an encoding that turns a tree into a string and back.", "source": "LeetCode", "difficulty": "advanced", "estimatedMinutes": 45, "searchQuery": "serialize and deserialize binary tree", "leetcodeSlug": "serialize-and-deserialize-binary-tree" }
+    ]
+  },
+  {
+    "topic": "Recursion and Backtracking",
+    "category": "DSA",
+    "keywords": ["recursion", "recursive", "backtracking", "permutations", "subsets", "n queens", "combinations"],
+    "resources": [
+      { "title": "Recursion in Programming - Full Course", "type": "video", "description": "Builds recursive thinking from the call stack up to classic problems.", "source": "freeCodeCamp (YouTube)", "difficulty": "beginner", "estimatedMinutes": 110, "searchQuery": "freeCodeCamp recursion in programming full course" },
+      { "title": "Backtracking Algorithms Explained", "type": "notes", "description": "The choose-explore-unchoose pattern with worked examples.", "source": "GeeksforGeeks", "difficulty": "intermediate", "estimatedMinutes": 30, "searchQuery": "geeksforgeeks introduction to backtracking" },
+      { "title": "Algorithms by Jeff Erickson: Recursion and Backtracking", "type": "pdf", "description": "Free textbook chapters on recursion, divide and conquer and backtracking.", "source": "University of Illinois", "difficulty": "advanced", "estimatedMinutes": 180, "url": "https://jeffe.cs.illinois.edu/teaching/algorithms/", "searchQuery": "Jeff Erickson algorithms backtracking chapter pdf" },
+      { "title": "Fibonacci Number", "type": "leetcode", "description": "Write your first recursive function, then optimise it.", "source": "LeetCode", "difficulty": "beginner", "estimatedMinutes": 15, "searchQuery": "fibonacci number", "leetcodeSlug": "fibonacci-number" },
+      { "title": "Subsets", "type": "leetcode", "description": "Generate the power set with include/exclude recursion.", "source": "LeetCode", "difficulty": "intermediate", "estimatedMinutes": 25, "searchQuery": "subsets", "leetcodeSlug": "subsets" },
+      { "title": "Permutations", "type": "leetcode", "description": "Build every ordering by backtracking over unused elements.", "source": "LeetCode", "difficulty": "intermediate", "estimatedMinutes": 25, "searchQuery": "permutations", "leetcodeSlug": "permutations" },
+      { "title": "Generate Parentheses", "type": "leetcode", "description": "Backtracking with constraints on open and close counts.", "source": "LeetCode", "difficulty": "intermediate", "estimatedMinutes": 30, "searchQuery": "generate parentheses", "leetcodeSlug": "generate-parentheses" },
+      { "title": "N-Queens", "type": "leetcode", "description": "Place N queens so none attack each other: the classic backtracking problem.", "source": "LeetCode", "difficulty": "advanced", "estimatedMinutes": 45, "searchQuery": "n-queens", "leetcodeSlug": "n-queens" }
+    ]
+  },
+  {
+    "topic": "HTML and CSS",
+    "category": "Web",
+    "keywords": ["html", "css", "html and css", "web design", "flexbox", "css grid", "responsive design", "frontend basics"],
+    "resources": [
+      { "title": "HTML & CSS Full Course", "type": "video", "description": "SuperSimpleDev's beginner course that builds real page layouts step by step.", "source": "SuperSimpleDev (YouTube)", "difficulty": "beginner", "estimatedMinutes": 400, "searchQuery": "SuperSimpleDev HTML CSS full course" },
+      { "title": "Learn Web Development", "type": "notes", "description": "Mozilla's structured guide to HTML, CSS and how the web works.", "source": "MDN Web Docs", "difficulty": "beginner", "estimatedMinutes": 600, "url": "https://developer.mozilla.org/en-US/docs/Learn_web_development", "searchQuery": "MDN learn web development" },
+      { "title": "Responsive Web Design Certification", "type": "course", "description": "Free hands-on curriculum where you build projects in the browser.", "source": "freeCodeCamp", "difficulty": "beginner", "estimatedMinutes": 1800, "url": "https://www.freecodecamp.org/learn/", "searchQuery": "freeCodeCamp responsive web design certification" },
+      { "title": "The Odin Project: Foundations", "type": "course", "description": "A project-based path covering HTML, CSS, Git and developer tooling.", "source": "The Odin Project", "difficulty": "beginner", "estimatedMinutes": 3000, "url": "https://www.theodinproject.com/", "searchQuery": "The Odin Project foundations course" },
+      { "title": "A Complete Guide to Flexbox", "type": "notes", "description": "The go-to visual reference for every flexbox property.", "source": "CSS-Tricks", "difficulty": "intermediate", "estimatedMinutes": 30, "url": "https://css-tricks.com/snippets/css/a-guide-to-flexbox/", "searchQuery": "css-tricks complete guide to flexbox" },
+      { "title": "CSS Grid Layouts", "type": "video", "description": "Kevin Powell explains when and how to use CSS Grid for real layouts.", "source": "Kevin Powell (YouTube)", "difficulty": "intermediate", "estimatedMinutes": 60, "searchQuery": "Kevin Powell CSS grid" }
+    ]
+  },
+  {
+    "topic": "JavaScript",
+    "category": "Web",
+    "keywords": ["javascript", "js", "es6", "dom", "promises", "async await", "closures", "typescript"],
+    "resources": [
+      { "title": "The Modern JavaScript Tutorial", "type": "notes", "description": "A thorough, free, regularly updated tutorial from basics to advanced topics.", "source": "javascript.info", "difficulty": "beginner", "estimatedMinutes": 1200, "url": "https://javascript.info/", "searchQuery": "javascript.info modern javascript tutorial" },
+      { "title": "JavaScript Programming - Full Course", "type": "video", "description": "A beginner course covering syntax, functions, objects and small projects.", "source": "freeCodeCamp (YouTube)", "difficulty": "beginner", "estimatedMinutes": 450, "searchQuery": "freeCodeCamp javascript programming full course" },
+      { "title": "JavaScript Algorithms and Data Structures Certification", "type": "course", "description": "Free interactive lessons and projects that practise core JavaScript.", "source": "freeCodeCamp", "difficulty": "beginner", "estimatedMinutes": 1800, "url": "https://www.freecodecamp.org/learn/", "searchQuery": "freeCodeCamp javascript algorithms and data structures certification" },
+      { "title": "Eloquent JavaScript", "type": "pdf", "description": "A free book that teaches programming through JavaScript, with exercises.", "source": "Marijn Haverbeke", "difficulty": "intermediate", "estimatedMinutes": 900, "url": "https://eloquentjavascript.net/", "searchQuery": "Eloquent JavaScript book" },
+      { "title": "JavaScript Guide", "type": "notes", "description": "Mozilla's official guide to the language, from grammar to modules.", "source": "MDN Web Docs", "difficulty": "intermediate", "estimatedMinutes": 300, "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide", "searchQuery": "MDN javascript guide" },
+      { "title": "Namaste JavaScript", "type": "video", "description": "Akshay Saini's series on how JavaScript really works: hoisting, closures and the event loop.", "source": "Akshay Saini (YouTube)", "difficulty": "intermediate", "estimatedMinutes": 600, "searchQuery": "Namaste JavaScript Akshay Saini" },
+      { "title": "You Don't Know JS Yet", "type": "notes", "description": "Kyle Simpson's free book series on scope, closures and types.", "source": "GitHub (getify)", "difficulty": "advanced", "estimatedMinutes": 900, "searchQuery": "You Don't Know JS Yet Kyle Simpson github" }
+    ]
+  },
+  {
+    "topic": "React",
+    "category": "Web",
+    "keywords": ["react", "reactjs", "react js", "react hooks", "jsx", "next js", "nextjs", "redux", "frontend framework"],
+    "resources": [
+      { "title": "Learn React", "type": "notes", "description": "The official React docs, with interactive examples and challenges.", "source": "react.dev", "difficulty": "beginner", "estimatedMinutes": 600, "url": "https://react.dev/learn", "searchQuery": "react.dev learn react" },
+      { "title": "Thinking in React", "type": "notes", "description": "The official guide to breaking a UI into components and state.", "source": "react.dev", "difficulty": "beginner", "estimatedMinutes": 30, "url": "https://react.dev/learn/thinking-in-react", "searchQuery": "thinking in react" },
+      { "title": "React Course - Beginner's Tutorial for React JavaScript Library", "type": "video", "description": "Bob Ziroll's hands-on beginner course with several small projects.", "source": "freeCodeCamp (YouTube)", "difficulty": "beginner", "estimatedMinutes": 720, "searchQuery": "freeCodeCamp react course beginner's tutorial Bob Ziroll" },
+      { "title": "Full Stack Open", "type": "course", "description": "University of Helsinki's free course on React, Node.js, testing and GraphQL.", "source": "University of Helsinki", "difficulty": "intermediate", "estimatedMinutes": 6000, "url": "https://fullstackopen.com/en/", "searchQuery": "Full Stack Open University of Helsinki" },
+      { "title": "React Tutorial for Beginners", "type": "video", "description": "The Net Ninja's step-by-step React series.", "source": "The Net Ninja (YouTube)", "difficulty": "beginner", "estimatedMinutes": 300, "searchQuery": "Net Ninja full modern react tutorial" }
+    ]
+  },
+  {
+    "topic": "Swift Programming",
+    "category": "iOS",
+    "keywords": ["swift", "swift programming", "swift language", "optionals", "protocols", "swift concurrency", "async await swift"],
+    "resources": [
+      { "title": "The Swift Programming Language", "type": "notes", "description": "Apple's official book: a language guide plus a complete reference.", "source": "Swift.org", "difficulty": "beginner", "estimatedMinutes": 900, "url": "https://docs.swift.org/swift-book/", "searchQuery": "The Swift Programming Language book" },
+      { "title": "100 Days of Swift", "type": "course", "description": "Paul Hudson's free daily course that teaches Swift through short lessons and projects.", "source": "Hacking with Swift", "difficulty": "beginner", "estimatedMinutes": 6000, "url": "https://www.hackingwithswift.com/100", "searchQuery": "100 days of swift hacking with swift" },
+      { "title": "Swift Programming Tutorial for Beginners", "type": "video", "description": "A full beginner course on Swift syntax, collections, optionals and structs.", "source": "YouTube", "difficulty": "beginner", "estimatedMinutes": 240, "searchQuery": "swift programming tutorial for beginners full course" },
+      { "title": "Swift by Sundell Articles", "type": "notes", "description": "In-depth articles on protocols, generics, concurrency and Swift idioms.", "source": "Swift by Sundell", "difficulty": "intermediate", "estimatedMinutes": 120, "searchQuery": "Swift by Sundell articles" },
+      { "title": "Meet async/await in Swift", "type": "video", "description": "Apple's WWDC21 session introducing Swift concurrency.", "source": "Apple Developer (WWDC)", "difficulty": "advanced", "estimatedMinutes": 35, "searchQuery": "WWDC21 meet async await in Swift" }
+    ]
+  },
+  {
+    "topic": "SwiftUI",
+    "category": "iOS",
+    "keywords": ["swiftui", "swift ui", "ios development", "ios app", "iphone app", "xcode", "app development ios", "swiftdata"],
+    "resources": [
+      { "title": "SwiftUI Tutorials", "type": "notes", "description": "Apple's official step-by-step tutorials for building a SwiftUI app.", "source": "Apple Developer", "difficulty": "beginner", "estimatedMinutes": 300, "url": "https://developer.apple.com/tutorials/swiftui", "searchQuery": "Apple SwiftUI tutorials" },
+      { "title": "100 Days of SwiftUI", "type": "course", "description": "Paul Hudson's free course that builds many small iOS apps with SwiftUI.", "source": "Hacking with Swift", "difficulty": "beginner", "estimatedMinutes": 6000, "url": "https://www.hackingwithswift.com/100/swiftui", "searchQuery": "100 days of swiftui" },
+      { "title": "CS193p: Developing Apps for iOS", "type": "course", "description": "Stanford's free lecture course on SwiftUI and MVVM.", "source": "Stanford University", "difficulty": "intermediate", "estimatedMinutes": 1800, "url": "https://cs193p.sites.stanford.edu/", "searchQuery": "Stanford CS193p developing apps for iOS" },
+      { "title": "SwiftUI Fundamentals", "type": "video", "description": "Sean Allen's beginner-friendly SwiftUI tutorials.", "source": "Sean Allen (YouTube)", "difficulty": "beginner", "estimatedMinutes": 180, "searchQuery": "Sean Allen SwiftUI fundamentals" },
+      { "title": "Discover Observation in SwiftUI", "type": "video", "description": "Apple's WWDC23 session on the @Observable macro and data flow.", "source": "Apple Developer (WWDC)", "difficulty": "intermediate", "estimatedMinutes": 15, "searchQuery": "WWDC23 discover observation in SwiftUI" },
+      { "title": "The SwiftUI Lab", "type": "notes", "description": "Advanced articles on layout, animation and less-documented SwiftUI behaviour.", "source": "The SwiftUI Lab", "difficulty": "advanced", "estimatedMinutes": 120, "searchQuery": "The SwiftUI Lab advanced articles" }
+    ]
+  },
+  {
+    "topic": "Machine Learning",
+    "category": "ML",
+    "keywords": ["machine learning", "ml", "supervised learning", "regression", "classification", "linear regression", "logistic regression", "scikit learn", "random forest"],
+    "resources": [
+      { "title": "Machine Learning Specialization", "type": "course", "description": "Andrew Ng's beginner-friendly course on regression, classification and recommender systems.", "source": "Coursera (DeepLearning.AI)", "difficulty": "beginner", "estimatedMinutes": 5000, "url": "https://www.coursera.org/specializations/machine-learning-introduction", "searchQuery": "Andrew Ng machine learning specialization coursera" },
+      { "title": "Machine Learning Crash Course", "type": "course", "description": "Google's fast-paced free course with interactive exercises.", "source": "Google for Developers", "difficulty": "beginner", "estimatedMinutes": 900, "url": "https://developers.google.com/machine-learning/crash-course", "searchQuery": "Google machine learning crash course" },
+      { "title": "StatQuest Machine Learning Playlist", "type": "video", "description": "Josh Starmer explains ML algorithms clearly and visually.", "source": "StatQuest (YouTube)", "difficulty": "beginner", "estimatedMinutes": 600, "searchQuery": "StatQuest machine learning playlist" },
+      { "title": "An Introduction to Statistical Learning", "type": "pdf", "description": "The free ISLR/ISLP textbook with labs in R and Python.", "source": "statlearning.com", "difficulty": "intermediate", "estimatedMinutes": 1800, "url": "https://www.statlearning.com/", "searchQuery": "An Introduction to Statistical Learning pdf" },
+      { "title": "scikit-learn User Guide", "type": "notes", "description": "Official documentation for practical ML in Python.", "source": "scikit-learn", "difficulty": "intermediate", "estimatedMinutes": 300, "url": "https://scikit-learn.org/stable/user_guide.html", "searchQuery": "scikit-learn user guide" },
+      { "title": "Stanford CS229: Machine Learning Lectures", "type": "video", "description": "Andrew Ng's mathematically rigorous Stanford lectures.", "source": "Stanford Online (YouTube)", "difficulty": "advanced", "estimatedMinutes": 1500, "searchQuery": "Stanford CS229 machine learning lectures Andrew Ng" },
+      { "title": "Pattern Recognition and Machine Learning", "type": "pdf", "description": "Bishop's classic graduate textbook, available free from Microsoft Research.", "source": "Christopher Bishop", "difficulty": "advanced", "estimatedMinutes": 3000, "searchQuery": "Bishop pattern recognition and machine learning pdf Microsoft" }
+    ]
+  },
+  {
+    "topic": "Deep Learning",
+    "category": "ML",
+    "keywords": ["deep learning", "neural networks", "neural network", "cnn", "rnn", "transformers", "pytorch", "tensorflow", "llm", "computer vision", "nlp"],
+    "resources": [
+      { "title": "Neural Networks Series", "type": "video", "description": "3Blue1Brown's visual explanation of neural networks, gradient descent and backpropagation.", "source": "3Blue1Brown (YouTube)", "difficulty": "beginner", "estimatedMinutes": 90, "searchQuery": "3Blue1Brown neural networks series" },
+      { "title": "Practical Deep Learning for Coders", "type": "course", "description": "fast.ai's free top-down course: train real models first, theory later.", "source": "fast.ai", "difficulty": "beginner", "estimatedMinutes": 1500, "url": "https://course.fast.ai/", "searchQuery": "fast.ai practical deep learning for coders" },
+      { "title": "Neural Networks: Zero to Hero", "type": "video", "description": "Andrej Karpathy builds neural networks and a GPT from scratch in code.", "source": "Andrej Karpathy (YouTube)", "difficulty": "intermediate", "estimatedMinutes": 900, "searchQuery": "Andrej Karpathy neural networks zero to hero" },
+      { "title": "Deep Learning Specialization", "type": "course", "description": "Andrew Ng's five-course series on deep networks, CNNs and sequence models.", "source": "Coursera (DeepLearning.AI)", "difficulty": "intermediate", "estimatedMinutes": 6000, "url": "https://www.coursera.org/specializations/deep-learning", "searchQuery": "deep learning specialization coursera" },
+      { "title": "Dive into Deep Learning", "type": "pdf", "description": "An interactive free book with runnable PyTorch code for every chapter.", "source": "d2l.ai", "difficulty": "intermediate", "estimatedMinutes": 3000, "url": "https://d2l.ai/", "searchQuery": "Dive into Deep Learning d2l" },
+      { "title": "PyTorch Tutorials", "type": "notes", "description": "Official tutorials from tensors to training and deploying models.", "source": "PyTorch", "difficulty": "intermediate", "estimatedMinutes": 300, "url": "https://pytorch.org/tutorials/", "searchQuery": "pytorch tutorials" },
+      { "title": "Deep Learning", "type": "pdf", "description": "Goodfellow, Bengio and Courville's foundational textbook, free to read online.", "source": "deeplearningbook.org", "difficulty": "advanced", "estimatedMinutes": 3000, "url": "https://www.deeplearningbook.org/", "searchQuery": "Goodfellow deep learning book" }
+    ]
+  },
+  {
+    "topic": "Linear Algebra",
+    "category": "Math",
+    "keywords": ["linear algebra", "matrices", "matrix", "vectors", "eigenvalues", "eigenvectors", "vector spaces", "determinants"],
+    "resources": [
+      { "title": "Essence of Linear Algebra", "type": "video", "description": "3Blue1Brown's visual series that builds geometric intuition for vectors and matrices.", "source": "3Blue1Brown (YouTube)", "difficulty": "beginner", "estimatedMinutes": 180, "searchQuery": "3Blue1Brown essence of linear algebra" },
+      { "title": "Linear Algebra", "type": "course", "description": "Free videos and practice exercises on vectors, matrices and transformations.", "source": "Khan Academy", "difficulty": "beginner", "estimatedMinutes": 1200, "url": "https://www.khanacademy.org/math/linear-algebra", "searchQuery": "Khan Academy linear algebra" },
+      { "title": "MIT 18.06 Linear Algebra", "type": "course", "description": "Gilbert Strang's famous lectures with problem sets and exams.", "source": "MIT OpenCourseWare", "difficulty": "intermediate", "estimatedMinutes": 2000, "url": "https://ocw.mit.edu/courses/18-06-linear-algebra-spring-2010/", "searchQuery": "MIT 18.06 linear algebra Gilbert Strang" },
+      { "title": "Mathematics for Machine Learning", "type": "pdf", "description": "A free book covering linear algebra, calculus and probability for ML.", "source": "Deisenroth, Faisal and Ong", "difficulty": "intermediate", "estimatedMinutes": 1500, "searchQuery": "Mathematics for Machine Learning book pdf Deisenroth" },
+      { "title": "Immersive Linear Algebra", "type": "notes", "description": "An online book with interactive 3-D figures.", "source": "immersivemath.com", "difficulty": "intermediate", "estimatedMinutes": 600, "url": "https://immersivemath.com/ila/", "searchQuery": "immersive linear algebra" },
+      { "title": "Linear Algebra Done Right", "type": "pdf", "description": "Axler's proof-based textbook, free to download.", "source": "Sheldon Axler", "difficulty": "advanced", "estimatedMinutes": 3000, "url": "https://linear.axler.net/", "searchQuery": "Linear Algebra Done Right Axler pdf" }
+    ]
+  },
+  {
+    "topic": "Discrete Mathematics",
+    "category": "Math",
+    "keywords": ["discrete mathematics", "discrete math", "dm", "logic", "set theory", "combinatorics", "proofs", "relations and functions"],
+    "resources": [
+      { "title": "Discrete Math Playlist", "type": "video", "description": "Trefor Bazett's lectures on logic, proofs, sets and counting.", "source": "Dr. Trefor Bazett (YouTube)", "difficulty": "beginner", "estimatedMinutes": 900, "searchQuery": "Trefor Bazett discrete math playlist" },
+      { "title": "Discrete Mathematics: An Open Introduction", "type": "pdf", "description": "Oscar Levin's free textbook, written for first-year students.", "source": "Oscar Levin", "difficulty": "beginner", "estimatedMinutes": 1500, "searchQuery": "Discrete Mathematics An Open Introduction Oscar Levin pdf" },
+      { "title": "MIT 6.042J Mathematics for Computer Science", "type": "course", "description": "MIT's course on proofs, number theory, graphs, counting and probability.", "source": "MIT OpenCourseWare", "difficulty": "intermediate", "estimatedMinutes": 2000, "url": "https://ocw.mit.edu/courses/6-042j-mathematics-for-computer-science-fall-2010/", "searchQuery": "MIT 6.042J mathematics for computer science" },
+      { "title": "Mathematics for Computer Science", "type": "pdf", "description": "Lehman, Leighton and Meyer's free textbook for MIT 6.042.", "source": "MIT", "difficulty": "intermediate", "estimatedMinutes": 3000, "searchQuery": "Mathematics for Computer Science Lehman Leighton Meyer pdf" },
+      { "title": "Discrete Mathematics Tutorial", "type": "notes", "description": "Exam-oriented articles on sets, relations, logic and graphs.", "source": "GeeksforGeeks", "difficulty": "beginner", "estimatedMinutes": 60, "searchQuery": "geeksforgeeks discrete mathematics tutorial" },
+      { "title": "Discrete Mathematics (NPTEL)", "type": "course", "description": "An Indian university-level lecture course with assignments.", "source": "NPTEL", "difficulty": "intermediate", "estimatedMinutes": 1800, "searchQuery": "NPTEL discrete mathematics course" }
+    ]
+  },
+  {
+    "topic": "Probability and Statistics",
+    "category": "Math",
+    "keywords": ["probability", "statistics", "stats", "probability and statistics", "bayes", "distributions", "hypothesis testing", "random variables"],
+    "resources": [
+      { "title": "Statistics and Probability", "type": "course", "description": "Free videos and exercises from basic statistics to inference.", "source": "Khan Academy", "difficulty": "beginner", "estimatedMinutes": 1500, "url": "https://www.khanacademy.org/math/statistics-probability", "searchQuery": "Khan Academy statistics and probability" },
+      { "title": "Statistics Fundamentals", "type": "video", "description": "StatQuest's clear, visual statistics explanations.", "source": "StatQuest (YouTube)", "difficulty": "beginner", "estimatedMinutes": 400, "searchQuery": "StatQuest statistics fundamentals" },
+      { "title": "OpenIntro Statistics", "type": "pdf", "description": "A free introductory statistics textbook with real data examples.", "source": "OpenIntro", "difficulty": "beginner", "estimatedMinutes": 1500, "url": "https://www.openintro.org/book/os/", "searchQuery": "OpenIntro Statistics pdf" },
+      { "title": "Think Stats", "type": "pdf", "description": "Allen Downey's free book on exploratory data analysis with Python.", "source": "Green Tea Press", "difficulty": "beginner", "estimatedMinutes": 600, "url": "https://greenteapress.com/wp/think-stats-2e/", "searchQuery": "Think Stats Allen Downey" },
+      { "title": "Harvard Stat 110: Probability", "type": "video", "description": "Joe Blitzstein's celebrated probability lectures.", "source": "Harvard (YouTube)", "difficulty": "intermediate", "estimatedMinutes": 2000, "searchQuery": "Harvard Stat 110 probability Joe Blitzstein lectures" },
+      { "title": "MIT 6.041 Probabilistic Systems Analysis", "type": "course", "description": "MIT's applied probability course with lectures and problem sets.", "source": "MIT OpenCourseWare", "difficulty": "intermediate", "estimatedMinutes": 2000, "url": "https://ocw.mit.edu/courses/6-041-probabilistic-systems-analysis-and-applied-probability-fall-2010/", "searchQuery": "MIT 6.041 probabilistic systems analysis" },
+      { "title": "Introduction to Probability", "type": "pdf", "description": "Blitzstein and Hwang's textbook for Stat 110, free to download.", "source": "Blitzstein and Hwang", "difficulty": "advanced", "estimatedMinutes": 3000, "searchQuery": "Blitzstein Hwang introduction to probability pdf" }
+    ]
+  },
+  {
+    "topic": "Operating Systems",
+    "category": "Systems",
+    "keywords": ["operating systems", "operating system", "os", "processes", "threads", "scheduling", "deadlock", "memory management", "paging", "file systems", "concurrency"],
+    "resources": [
+      { "title": "Operating System Playlist", "type": "video", "description": "Gate Smashers' exam-focused lectures on scheduling, deadlocks and memory.", "source": "Gate Smashers (YouTube)", "difficulty": "beginner", "estimatedMinutes": 900, "searchQuery": "Gate Smashers operating system playlist" },
+      { "title": "Operating Systems Lectures", "type": "video", "description": "Neso Academy's structured course on OS concepts.", "source": "Neso Academy (YouTube)", "difficulty": "beginner", "estimatedMinutes": 900, "searchQuery": "Neso Academy operating system" },
+      { "title": "Operating Systems: Three Easy Pieces", "type": "pdf", "description": "The free OSTEP book on virtualization, concurrency and persistence.", "source": "University of Wisconsin-Madison", "difficulty": "intermediate", "estimatedMinutes": 2400, "url": "https://pages.cs.wisc.edu/~remzi/OSTEP/", "searchQuery": "Operating Systems Three Easy Pieces OSTEP" },
+      { "title": "Operating System Tutorial", "type": "notes", "description": "Short articles on every OS topic in the university syllabus.", "source": "GeeksforGeeks", "difficulty": "beginner", "estimatedMinutes": 120, "searchQuery": "geeksforgeeks operating system tutorial" },
+      { "title": "Operating Systems (NPTEL)", "type": "course", "description": "An IIT lecture course with weekly assignments.", "source": "NPTEL", "difficulty": "intermediate", "estimatedMinutes": 1800, "searchQuery": "NPTEL operating systems course" },
+      { "title": "MIT 6.1810 Operating System Engineering", "type": "course", "description": "Build parts of the xv6 teaching kernel in C: a hands-on, advanced course.", "source": "MIT", "difficulty": "advanced", "estimatedMinutes": 4000, "url": "https://pdos.csail.mit.edu/6.828/", "searchQuery": "MIT 6.1810 operating system engineering xv6" }
+    ]
+  },
+  {
+    "topic": "Computer Networks",
+    "category": "Systems",
+    "keywords": ["computer networks", "computer networking", "networking", "networks", "cn", "tcp", "tcp ip", "osi model", "http", "dns", "routing", "sockets"],
+    "resources": [
+      { "title": "Computer Networks Playlist", "type": "video", "description": "Neso Academy's lectures on network layers, protocols and addressing.", "source": "Neso Academy (YouTube)", "difficulty": "beginner", "estimatedMinutes": 900, "searchQuery": "Neso Academy computer networks" },
+      { "title": "Computer Network Tutorial", "type": "notes", "description": "Articles on the OSI model, TCP/IP, subnetting and protocols.", "source": "GeeksforGeeks", "difficulty": "beginner", "estimatedMinutes": 120, "searchQuery": "geeksforgeeks computer network tutorial" },
+      { "title": "Computer Networking: A Top-Down Approach Lectures", "type": "video", "description": "Jim Kurose's own video lectures for his widely used textbook.", "source": "Jim Kurose (YouTube)", "difficulty": "intermediate", "estimatedMinutes": 1200, "searchQuery": "Kurose computer networking top down approach lectures" },
+      { "title": "Computer Networks: A Systems Approach", "type": "pdf", "description": "Peterson and Davie's textbook, free to read online.", "source": "systemsapproach.org", "difficulty": "intermediate", "estimatedMinutes": 2400, "url": "https://book.systemsapproach.org/", "searchQuery": "Computer Networks A Systems Approach book" },
+      { "title": "Computer Networks and Internet Protocol (NPTEL)", "type": "course", "description": "An IIT Kharagpur lecture course on networking fundamentals.", "source": "NPTEL", "difficulty": "intermediate", "estimatedMinutes": 1800, "searchQuery": "NPTEL computer networks and internet protocol" },
+      { "title": "Beej's Guide to Network Programming", "type": "notes", "description": "A practical, free guide to socket programming in C.", "source": "Beej", "difficulty": "advanced", "estimatedMinutes": 300, "url": "https://beej.us/guide/bgnet/", "searchQuery": "Beej's guide to network programming" }
+    ]
+  },
+  {
+    "topic": "SQL and Databases",
+    "category": "Databases",
+    "keywords": ["sql", "dbms", "database", "databases", "mysql", "postgresql", "normalization", "joins", "database management system", "sql queries"],
+    "resources": [
+      { "title": "SQLBolt Interactive Lessons", "type": "notes", "description": "Learn SQL with short interactive exercises in the browser.", "source": "SQLBolt", "difficulty": "beginner", "estimatedMinutes": 120, "url": "https://sqlbolt.com/", "searchQuery": "SQLBolt interactive SQL lessons" },
+      { "title": "SQL Tutorial - Full Database Course for Beginners", "type": "video", "description": "A beginner course on queries, joins, schema design and MySQL.", "source": "freeCodeCamp (YouTube)", "difficulty": "beginner", "estimatedMinutes": 260, "searchQuery": "freeCodeCamp SQL tutorial full database course for beginners" },
+      { "title": "DBMS Playlist", "type": "video", "description": "Gate Smashers' lectures on ER models, normalization and transactions.", "source": "Gate Smashers (YouTube)", "difficulty": "beginner", "estimatedMinutes": 900, "searchQuery": "Gate Smashers DBMS playlist" },
+      { "title": "DBMS Tutorial", "type": "notes", "description": "Articles on keys, normalization, indexing and transactions.", "source": "GeeksforGeeks", "difficulty": "beginner", "estimatedMinutes": 120, "searchQuery": "geeksforgeeks DBMS tutorial" },
+      { "title": "Database System Concepts Slides", "type": "pdf", "description": "Official slides for the Silberschatz, Korth and Sudarshan textbook.", "source": "db-book.com", "difficulty": "intermediate", "estimatedMinutes": 600, "url": "https://www.db-book.com/", "searchQuery": "Database System Concepts slides Silberschatz" },
+      { "title": "CMU 15-445 Database Systems", "type": "course", "description": "Andy Pavlo's course on how databases work inside: storage, indexes, query execution.", "source": "Carnegie Mellon University", "difficulty": "advanced", "estimatedMinutes": 2400, "url": "https://15445.courses.cs.cmu.edu/", "searchQuery": "CMU 15-445 database systems Andy Pavlo" },
+      { "title": "Combine Two Tables", "type": "leetcode", "description": "Your first LEFT JOIN problem.", "source": "LeetCode", "difficulty": "beginner", "estimatedMinutes": 10, "searchQuery": "combine two tables", "leetcodeSlug": "combine-two-tables" },
+      { "title": "Second Highest Salary", "type": "leetcode", "description": "Practise subqueries, LIMIT/OFFSET and handling NULL.", "source": "LeetCode", "difficulty": "intermediate", "estimatedMinutes": 15, "searchQuery": "second highest salary", "leetcodeSlug": "second-highest-salary" },
+      { "title": "Department Top Three Salaries", "type": "leetcode", "description": "Window functions or correlated subqueries for ranking within groups.", "source": "LeetCode", "difficulty": "advanced", "estimatedMinutes": 30, "searchQuery": "department top three salaries", "leetcodeSlug": "department-top-three-salaries" }
+    ]
+  },
+  {
+    "topic": "Python Programming",
+    "category": "General",
+    "keywords": ["python", "python programming", "python basics", "learn python", "python3"],
+    "resources": [
+      { "title": "The Python Tutorial", "type": "notes", "description": "The official tutorial from the Python documentation.", "source": "Python.org", "difficulty": "beginner", "estimatedMinutes": 300, "url": "https://docs.python.org/3/tutorial/", "searchQuery": "official python tutorial" },
+      { "title": "Learn Python - Full Course for Beginners", "type": "video", "description": "A beginner course covering variables, functions, loops and classes.", "source": "freeCodeCamp (YouTube)", "difficulty": "beginner", "estimatedMinutes": 270, "searchQuery": "freeCodeCamp learn python full course for beginners" },
+      { "title": "Python for Everybody", "type": "course", "description": "Dr. Chuck's free course on programming and data handling in Python.", "source": "py4e.com", "difficulty": "beginner", "estimatedMinutes": 3000, "url": "https://www.py4e.com/", "searchQuery": "Python for Everybody Dr Chuck" },
+      { "title": "Automate the Boring Stuff with Python", "type": "pdf", "description": "A practical free book: use Python to automate everyday tasks.", "source": "Al Sweigart", "difficulty": "beginner", "estimatedMinutes": 1200, "url": "https://automatetheboringstuff.com/", "searchQuery": "Automate the Boring Stuff with Python" },
+      { "title": "Think Python", "type": "pdf", "description": "Allen Downey's free introduction to programming with Python.", "source": "Green Tea Press", "difficulty": "beginner", "estimatedMinutes": 900, "url": "https://greenteapress.com/wp/think-python-2e/", "searchQuery": "Think Python Allen Downey" },
+      { "title": "Python Tutorials", "type": "video", "description": "Corey Schafer's in-depth videos on OOP, decorators, generators and more.", "source": "Corey Schafer (YouTube)", "difficulty": "intermediate", "estimatedMinutes": 900, "searchQuery": "Corey Schafer python tutorials" },
+      { "title": "Real Python Tutorials", "type": "notes", "description": "Practical, in-depth articles on intermediate and advanced Python.", "source": "Real Python", "difficulty": "intermediate", "estimatedMinutes": 300, "url": "https://realpython.com/", "searchQuery": "Real Python tutorials" },
+      { "title": "Fizz Buzz", "type": "leetcode", "description": "A warm-up problem to practise loops and conditionals.", "source": "LeetCode", "difficulty": "beginner", "estimatedMinutes": 10, "searchQuery": "fizz buzz", "leetcodeSlug": "fizz-buzz" }
+    ]
+  },
+  {
+    "topic": "Git and GitHub",
+    "category": "General",
+    "keywords": ["git", "github", "version control", "git and github", "git branching", "pull requests"],
+    "resources": [
+      { "title": "Git and GitHub for Beginners - Crash Course", "type": "video", "description": "A one-hour introduction to commits, branches and pull requests.", "source": "freeCodeCamp (YouTube)", "difficulty": "beginner", "estimatedMinutes": 70, "searchQuery": "freeCodeCamp git and github for beginners crash course" },
+      { "title": "Learn Git Branching", "type": "notes", "description": "An interactive visual playground for learning branching and rebasing.", "source": "learngitbranching.js.org", "difficulty": "beginner", "estimatedMinutes": 120, "url": "https://learngitbranching.js.org/", "searchQuery": "learn git branching interactive" },
+      { "title": "GitHub Skills", "type": "course", "description": "Free hands-on courses that run inside your own GitHub repositories.", "source": "GitHub", "difficulty": "beginner", "estimatedMinutes": 300, "url": "https://skills.github.com/", "searchQuery": "GitHub Skills courses" },
+      { "title": "Pro Git", "type": "pdf", "description": "The complete official Git book, free to read or download.", "source": "git-scm.com", "difficulty": "intermediate", "estimatedMinutes": 900, "url": "https://git-scm.com/book/en/v2", "searchQuery": "Pro Git book" },
+      { "title": "Atlassian Git Tutorials", "type": "notes", "description": "Clear guides to workflows, merging versus rebasing, and advanced commands.", "source": "Atlassian", "difficulty": "intermediate", "estimatedMinutes": 180, "url": "https://www.atlassian.com/git/tutorials", "searchQuery": "Atlassian git tutorials" }
+    ]
+  }
+]

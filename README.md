@@ -126,7 +126,8 @@ LearnWise/
 │   ├── Services/          # Gemini, LinkResolver, RecommendationEngine, Offline, Core ML
 │   ├── Persistence/       # SwiftData container setup and helpers
 │   ├── Utilities/         # Extensions, constants, AppError
-│   └── Resources/         # Assets, resources_catalog.json, TopicClassifier.mlmodel
+│   └── Resources/         # Assets, resources_catalog.json, LearnWiseTopicClassifier.mlmodel
+├── Tools/                 # Windows helper scripts + Create ML training data (not in the app)
 ├── LearnWiseTests/
 ├── LearnWiseUITests/
 ├── README.md

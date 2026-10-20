@@ -142,8 +142,8 @@ LearnWise/
 │   │   │   └── PromptBuilder.swift       # Prompt + JSON schema
 │   │   ├── LinkResolver.swift
 │   │   ├── YouTubeService.swift          # Optional, YouTube Data API v3
-│   │   ├── OfflineCatalogService.swift
-│   │   └── TopicClassifier.swift         # Core ML wrapper
+│   │   ├── OfflineCatalogService.swift   # Also CatalogEntry; matching, picking, rule-based roadmap
+│   │   └── TopicClassifier.swift         # Core ML model or keyword rules; TopicClassifying protocol
 │   │
 │   ├── Persistence/
 │   │   ├── PersistenceController.swift   # ModelContainer config + preview container
@@ -154,19 +154,22 @@ LearnWise/
 │   │   ├── AppError.swift
 │   │   ├── Constants.swift               # Endpoints, limits, link allow-lists
 │   │   ├── JSONValue.swift               # Encodes Gemini's responseSchema
+│   │   ├── TopicText.swift               # Topic text normalising for matching
 │   │   └── Extensions/
 │   │       ├── String+Trimming.swift
 │   │       └── URL+Search.swift
 │   │
 │   └── Resources/
 │       ├── Assets.xcassets
-│       ├── resources_catalog.json        # Offline curated catalog
-│       └── TopicClassifier.mlmodel       # Optional, trained in Create ML
+│       ├── resources_catalog.json        # Offline curated catalog (20 topics)
+│       └── LearnWiseTopicClassifier.mlmodel  # Optional, trained in Create ML (§6.2)
 │
 ├── LearnWiseTests/
 │   ├── RecommendationDecodingTests.swift
 │   ├── LinkResolverTests.swift
 │   ├── RecommendationEngineTests.swift
+│   ├── OfflineCatalogServiceTests.swift
+│   ├── TopicClassifierTests.swift
 │   ├── HomeViewModelTests.swift
 │   └── Mocks/
 │       ├── MockGeminiService.swift       # Also MockYouTubeService
@@ -178,7 +181,10 @@ LearnWise/
 │
 └── Tools/                                # Not part of the app target
     ├── gemini_request.json               # Same prompt and schema as PromptBuilder.swift
-    └── test_gemini.ps1                   # Calls Gemini from Windows/PowerShell to test prompts
+    ├── test_gemini.ps1                   # Calls Gemini from Windows/PowerShell to test prompts
+    ├── validate_catalog.ps1              # Checks resources_catalog.json and its URLs
+    └── CreateML/
+        └── topics_training.csv           # Training data for LearnWiseTopicClassifier
 ```
 
 > `LinkResolving.swift` also declares the `YouTubeSearching` protocol.
@@ -447,10 +453,22 @@ _Optional extension:_ a lightweight `HEAD` request (timeout 3 s) to drop any URL
 ## 6. Offline Fallback and Core ML
 
 ### 6.1 `OfflineCatalogService`
-- Loads `resources_catalog.json` from the bundle (around 20 topics × 8 resources, curated by hand).
-- Matching: normalise the topic → keyword match against `catalog[].keywords` → filter by `level`.
-- If nothing matches, `TopicClassifier` predicts a **category** and generic resources for that category are returned.
-- The roadmap is generated with simple rules: sort by difficulty, then group into steps.
+- Loads `resources_catalog.json` from the bundle: 20 hand-picked topics and 141 resources across all 8 categories.
+- **Normalising** (`TopicText.tokens`): lowercase, `&` → "and", punctuation removed (keeping `+` and `#` for C++/C#), plurals stripped, and filler words dropped ("intro", "basics", "the"…).
+- **Scoring**, against each entry's topic and keywords:
+
+  | Case | Score | Example |
+  |---|---|---|
+  | Same words | 100 | "dp" → Dynamic Programming |
+  | Whole keyword appears inside the query | 60 + 5 per word | "DP for interviews" |
+  | Query is part of a keyword | 50 | "swift" inside "swift ui" |
+  | Words in common | 10 each | |
+
+  The best entry wins if it scores at least 20, so one shared word ("Java *programming*") isn't enough.
+- **No match:** `TopicClassifier` predicts a **category**, and resources are pooled from every catalog topic in that category.
+- **Picking** (`pick(_:for:limit:)`): takes resources round-robin by type, so the mix stays varied, up to 10. Within each type, the closest difficulty comes first, and a resource one level harder beats one a level easier.
+- **Roadmap** (rule-based): *Build the foundations* (videos, notes) → *Go deeper* (courses, PDFs) → *Practise* (LeetCode). Empty stages are skipped, and hours come from `estimatedMinutes` (30 min when missing).
+- **Checking on Windows:** `Tools/validate_catalog.ps1` checks types, levels, slugs and duplicate keywords, and checks every URL against the same allow-list `LinkResolver` uses.
 
 `resources_catalog.json` shape:
 ```json
@@ -466,7 +484,8 @@ _Optional extension:_ a lightweight `HEAD` request (timeout 3 s) to drop any URL
 
 ### 6.2 `TopicClassifier` (optional Core ML)
 - **Model:** Create ML **Text Classifier** (Maximum Entropy or Transfer Learning / BERT embeddings).
-- **Training data:** `topics_training.csv` with the columns `text,label`, for example:
+- **Name:** the file must be **`LearnWiseTopicClassifier.mlmodel`**. If it were called `TopicClassifier.mlmodel`, Xcode's generated class would clash with our `TopicClassifier` wrapper.
+- **Training data:** `Tools/CreateML/topics_training.csv`, with 255 rows and at least 30 per label, in the columns `text,label`. For example:
   ```
   text,label
   binary search tree insertion,DSA
@@ -476,12 +495,20 @@ _Optional extension:_ a lightweight `HEAD` request (timeout 3 s) to drop any URL
   swiftui navigationstack,iOS
   ```
 - **Labels:** `DSA`, `Web`, `iOS`, `ML`, `Math`, `Systems`, `Databases`, `General`
-- **Training:** Xcode → Open Developer Tool → Create ML → Text Classifier → import the CSV → Train → export `TopicClassifier.mlmodel` → drag it into `Resources/`.
-- **Usage:**
+- **Training (Mac):**
+  1. Xcode → Open Developer Tool → **Create ML** → New Document → **Text Classification**.
+  2. Training Data → choose `topics_training.csv`. Text column `text`, label column `label`.
+  3. Validation: leave it on **Automatic** (Create ML holds back part of the data).
+  4. Algorithm: try **Maximum Entropy** first. Use **Transfer Learning** if accuracy is poor.
+  5. **Train**, then type sample topics in the Preview tab to check the predictions.
+  6. Output → save as **`LearnWiseTopicClassifier.mlmodel`** → drag it into `LearnWise/Resources/` and tick the LearnWise target.
+- **Usage:** the model is loaded with `NLModel` by name, not through Xcode's generated class, so **the app builds and runs before the model exists**:
   ```swift
-  let model = try TopicClassifier(configuration: .init())
-  let category = try model.prediction(text: topic).label
+  let url = Bundle.main.url(forResource: "LearnWiseTopicClassifier", withExtension: "mlmodelc")
+  let model = url.flatMap { try? NLModel(contentsOf: $0) }
+  let category = model?.predictedLabel(for: topic) ?? keywordCategory(for: topic) ?? "General"
   ```
+  Without the model, keyword rules decide (for example, "linear algebra" → Math, "tcp" → Systems). Both paths are behind the `TopicClassifying` protocol, so tests can supply a fixed category.
 - **Also used online:** to tag history items with a category and pick a section icon.
 
 ---

@@ -94,12 +94,14 @@ Students waste time searching scattered platforms (YouTube, PDFs, MOOCs, LeetCod
 - [ ] "Save Roadmap" → `SavedRoadmap`
 - [ ] _(Stretch)_ checkboxes for completed steps + a progress bar
 
-### Phase 8: Offline + Core ML _(Stretch)_
-- [ ] Write `resources_catalog.json` (~20 topics)
-- [ ] `OfflineCatalogService` keyword matching
-- [ ] Prepare `topics_training.csv` (≥ 30 rows per label)
-- [ ] Train the `TopicClassifier` in Create ML _(Mac)_ and add it to the target
-- [ ] `TopicClassifier` wrapper + fallback wiring
+### Phase 8: Offline + Core ML ✍️
+> Moved up from "stretch": free-tier Gemini took 1.5–3 minutes and sometimes returned 503s in testing, so the offline mode keeps the demo working.
+- [x] Write `resources_catalog.json` (20 topics, 141 resources; `validate_catalog.ps1` passes and 53 of 54 URLs load. realpython.com blocks scripts but works in a browser.)
+- [ ] ✍️ `OfflineCatalogService` keyword matching + rule-based roadmap + `OfflineCatalogServiceTests`
+- [x] Prepare `Tools/CreateML/topics_training.csv` (255 rows, ≥ 30 per label)
+- [ ] ✍️ `TopicClassifier` wrapper (Core ML or keyword rules) + `TopicClassifierTests`
+- [ ] Train `LearnWiseTopicClassifier.mlmodel` in Create ML _(Mac)_ and add it to the target (ARCHITECTURE §6.2)
+- [ ] Wire `OfflineCatalogService` in as the engine's `fallback` in `AppEnvironment` (Phase 2)
 - [ ] Offline banner in `ResultsView`
 
 ### Phase 9: Polish and Testing

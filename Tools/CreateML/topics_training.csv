@@ -1,0 +1,256 @@
+text,label
+binary search tree insertion,DSA
+dynamic programming for beginners,DSA
+how to solve dp problems,DSA
+linked list reversal,DSA
+graph algorithms bfs and dfs,DSA
+dijkstra shortest path,DSA
+topological sorting,DSA
+heap and priority queue,DSA
+hash maps and hashing,DSA
+sorting algorithms quicksort mergesort,DSA
+binary search on answer,DSA
+recursion and backtracking,DSA
+sliding window technique,DSA
+two pointers problems,DSA
+stack and queue implementation,DSA
+trie data structure,DSA
+segment tree range queries,DSA
+union find disjoint set,DSA
+greedy algorithms,DSA
+time and space complexity big o,DSA
+leetcode interview preparation,DSA
+competitive programming,DSA
+minimum spanning tree kruskal prim,DSA
+knapsack problem,DSA
+data structures and algorithms,DSA
+dsa for placements,DSA
+arrays and strings problems,DSA
+bit manipulation tricks,DSA
+avl and red black trees,DSA
+divide and conquer,DSA
+monotonic stack,DSA
+graph cycle detection,DSA
+longest common subsequence,DSA
+matrix traversal problems,DSA
+html basics,Web
+css flexbox and grid,Web
+responsive web design,Web
+javascript closures and promises,Web
+async await in javascript,Web
+react hooks useeffect,Web
+react state management redux,Web
+next js server components,Web
+node js express api,Web
+rest api design,Web
+typescript generics,Web
+dom manipulation,Web
+tailwind css,Web
+vue js basics,Web
+angular components,Web
+web development roadmap,Web
+frontend development,Web
+backend development with node,Web
+full stack web development,Web
+mern stack project,Web
+django web framework,Web
+flask python web app,Web
+http cookies and sessions,Web
+authentication with jwt,Web
+graphql apis,Web
+web accessibility,Web
+css animations,Web
+build a portfolio website,Web
+javascript event loop,Web
+webpack and vite bundlers,Web
+browser rendering performance,Web
+swift programming basics,iOS
+swiftui navigationstack,iOS
+swiftui state and binding,iOS
+ios app development,iOS
+build my first iphone app,iOS
+uikit table views,iOS
+xcode beginner guide,iOS
+swift optionals,iOS
+swift protocols and generics,iOS
+swift concurrency async await,iOS
+swiftdata persistence,iOS
+core data tutorial,iOS
+combine framework,iOS
+mvvm in swiftui,iOS
+ios networking with urlsession,iOS
+publishing an app to the app store,iOS
+swiftui animations,iOS
+core ml in ios apps,iOS
+widgets with widgetkit,iOS
+ios push notifications,iOS
+auto layout constraints,iOS
+swift closures,iOS
+observable macro swiftui,iOS
+watchos app development,iOS
+arkit augmented reality,iOS
+swift package manager,iOS
+mapkit and core location,iOS
+ios unit testing xctest,iOS
+swiftui lists and grids,iOS
+macos app with swiftui,iOS
+machine learning basics,ML
+supervised vs unsupervised learning,ML
+linear regression,ML
+logistic regression classification,ML
+decision trees and random forests,ML
+k means clustering,ML
+neural networks from scratch,ML
+deep learning with pytorch,ML
+tensorflow keras tutorial,ML
+convolutional neural networks,ML
+recurrent neural networks lstm,ML
+transformers and attention,ML
+large language models,ML
+natural language processing,ML
+computer vision image classification,ML
+gradient descent intuition,ML
+overfitting and regularization,ML
+scikit learn models,ML
+feature engineering,ML
+data science with pandas,ML
+numpy for data analysis,ML
+reinforcement learning,ML
+generative ai,ML
+support vector machines,ML
+model evaluation metrics,ML
+bias variance tradeoff,ML
+recommendation systems,ML
+fine tuning llms,ML
+artificial intelligence introduction,ML
+principal component analysis,ML
+naive bayes classifier,ML
+xgboost gradient boosting,ML
+linear algebra,Math
+eigenvalues and eigenvectors,Math
+matrix multiplication,Math
+vector spaces and subspaces,Math
+calculus derivatives,Math
+integration techniques,Math
+multivariable calculus,Math
+differential equations,Math
+probability basics,Math
+conditional probability and bayes theorem,Math
+random variables and distributions,Math
+statistics for beginners,Math
+hypothesis testing,Math
+discrete mathematics,Math
+set theory,Math
+propositional logic,Math
+mathematical induction proofs,Math
+combinatorics and counting,Math
+permutations and combinations formula,Math
+number theory modular arithmetic,Math
+graph theory in discrete math,Math
+relations and functions,Math
+determinants,Math
+engineering mathematics,Math
+fourier series,Math
+laplace transform,Math
+numerical methods,Math
+optimization and convex functions,Math
+central limit theorem,Math
+regression in statistics,Math
+trigonometry,Math
+complex numbers,Math
+operating systems,Systems
+process scheduling algorithms,Systems
+deadlocks in os,Systems
+memory management and paging,Systems
+virtual memory,Systems
+threads and concurrency,Systems
+synchronization semaphores mutex,Systems
+file systems,Systems
+computer networks,Systems
+osi model layers,Systems
+tcp vs udp,Systems
+ip addressing and subnetting,Systems
+dns how it works,Systems
+routing algorithms,Systems
+socket programming,Systems
+computer architecture,Systems
+cpu pipelining,Systems
+cache memory,Systems
+compiler design,Systems
+linux command line,Systems
+shell scripting bash,Systems
+distributed systems,Systems
+cloud computing aws,Systems
+docker containers,Systems
+kubernetes basics,Systems
+system design interview,Systems
+network security basics,Systems
+cryptography fundamentals,Systems
+computer organization,Systems
+microprocessors 8086,Systems
+embedded systems,Systems
+load balancing,Systems
+sql basics,Databases
+sql joins,Databases
+sql queries practice,Databases
+group by and having,Databases
+subqueries in sql,Databases
+window functions sql,Databases
+database normalization,Databases
+1nf 2nf 3nf bcnf,Databases
+er diagrams,Databases
+dbms concepts,Databases
+transactions and acid properties,Databases
+indexing in databases,Databases
+b trees in databases,Databases
+mysql tutorial,Databases
+postgresql for beginners,Databases
+mongodb nosql,Databases
+nosql vs sql,Databases
+stored procedures and triggers,Databases
+relational algebra,Databases
+query optimization,Databases
+concurrency control in dbms,Databases
+database design,Databases
+primary key and foreign key,Databases
+redis caching,Databases
+sql for data analysis,Databases
+database sharding,Databases
+oracle database,Databases
+sqlite basics,Databases
+views in sql,Databases
+cassandra database,Databases
+firebase firestore,Databases
+deadlock in dbms,Databases
+python programming,General
+learn python basics,General
+java programming,General
+c programming basics,General
+c++ for beginners,General
+object oriented programming,General
+oops concepts,General
+git and github,General
+version control with git,General
+software engineering,General
+design patterns,General
+clean code practices,General
+unit testing basics,General
+agile and scrum,General
+how to learn programming,General
+programming fundamentals,General
+problem solving skills,General
+resume for software jobs,General
+open source contribution,General
+kotlin programming,General
+rust programming language,General
+go programming language,General
+uml diagrams,General
+software development life cycle,General
+technical writing,General
+regular expressions,General
+vs code tips,General
+communication skills for engineers,General
+project management,General
+exception handling,General
+functional programming,General
+command line basics for programmers,General

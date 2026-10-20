@@ -50,7 +50,7 @@ struct LinkResolver: LinkResolving {
                 ?? .googleSearch("\(query) filetype:pdf")
 
         case .course:
-            return trusted(suggested, hosts: Constants.AllowedHosts.course)
+            return trusted(suggested, hosts: Constants.AllowedHosts.course, allowAcademic: true)
                 ?? .googleSearch("\(query) course")
 
         case .notes:
