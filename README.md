@@ -98,6 +98,7 @@ All source code for Phases 1–10 has been written, and the tests are in place: 
 ## 🚀 Getting Started
 
 The Xcode project (`LearnWise.xcodeproj`) is already in the repo. There's no project setup to do.
+**First time on a Mac?** Follow **[DEMO.md](DEMO.md)**: step-by-step setup, a feature test checklist and troubleshooting.
 
 ### 1. Clone the repo
 ```bash
