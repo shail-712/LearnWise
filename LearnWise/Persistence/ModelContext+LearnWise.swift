@@ -22,6 +22,7 @@ extension ModelContext {
     /// Adds the bookmark if it's missing, or removes it if it exists. Returns the new state.
     @discardableResult
     func toggleBookmark(_ resource: Resource, topic: String) -> Bool {
+        defer { try? save() }
         if let existing = bookmark(for: resource) {
             delete(existing)
             return false
@@ -45,20 +46,22 @@ extension ModelContext {
 
         insert(SearchHistoryItem(request: request, response: response))
         trimHistory(to: Constants.maxHistoryItems)
+        try? save()
     }
 
+    /// Keeps the newest `limit` searches.
+    /// Sorting and trimming happen in Swift on purpose: SwiftData applies `fetchOffset` only to
+    /// saved rows, so a just-inserted (unsaved) search would be returned and deleted.
     func trimHistory(to limit: Int) {
-        var descriptor = FetchDescriptor<SearchHistoryItem>(
-            sortBy: [SortDescriptor(\.searchedAt, order: .reverse)]
-        )
-        descriptor.fetchOffset = limit
-        for item in (try? fetch(descriptor)) ?? [] {
+        let items = ((try? fetch(FetchDescriptor<SearchHistoryItem>())) ?? [])
+            .sorted { $0.searchedAt > $1.searchedAt }
+        for item in items.dropFirst(limit) {
             delete(item)
         }
     }
 
     func clearHistory() {
-        try? delete(model: SearchHistoryItem.self)
+        deleteAll(SearchHistoryItem.self)
     }
 
     // MARK: Saved roadmaps
@@ -81,16 +84,26 @@ extension ModelContext {
         }
         let roadmap = SavedRoadmap(response: response, level: level)
         insert(roadmap)
+        try? save()
         return roadmap
     }
 
     // MARK: Clearing data (Settings)
 
     func clearBookmarks() {
-        try? delete(model: BookmarkedResource.self)
+        deleteAll(BookmarkedResource.self)
     }
 
     func clearSavedRoadmaps() {
-        try? delete(model: SavedRoadmap.self)
+        deleteAll(SavedRoadmap.self)
+    }
+
+    /// Deletes one by one rather than with `delete(model:)`: the batch delete bypasses the
+    /// context, so `@Query` lists already on screen may not update until the app restarts.
+    private func deleteAll<T: PersistentModel>(_ type: T.Type) {
+        for item in (try? fetch(FetchDescriptor<T>())) ?? [] {
+            delete(item)
+        }
+        try? save()
     }
 }

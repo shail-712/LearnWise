@@ -52,6 +52,14 @@ final class PersistenceTests: XCTestCase {
 
     // MARK: History
 
+    func testNewSearchIsKeptAfterTrimming() throws {
+        // Regression: trimming used fetchOffset, which deleted the just-inserted (unsaved) search.
+        context.recordSearch(SampleData.request, response: SampleData.response)
+
+        let items = try context.fetch(FetchDescriptor<SearchHistoryItem>())
+        XCTAssertEqual(items.map(\.topic), [SampleData.request.topic])
+    }
+
     func testRecordSearchReplacesIdenticalSearch() {
         context.recordSearch(SampleData.request, response: SampleData.response)
         context.recordSearch(SampleData.request, response: SampleData.response)
