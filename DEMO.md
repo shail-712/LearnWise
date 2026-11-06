@@ -41,7 +41,7 @@ In the window that opens, paste your key after the `=` and save (⌘S):
 
 ```
 GEMINI_API_KEY = AIza...your key...
-GEMINI_MODEL = gemini-3.8-flash
+GEMINI_MODEL = gemini-3.6-flash
 YOUTUBE_API_KEY =
 ```
 

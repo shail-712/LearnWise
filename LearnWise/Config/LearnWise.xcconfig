@@ -4,7 +4,7 @@
 // The app then runs on the offline catalog.
 
 GEMINI_API_KEY =
-GEMINI_MODEL = gemini-3.8-flash
+GEMINI_MODEL = gemini-3.6-flash
 YOUTUBE_API_KEY =
 
 #include? "Secrets.xcconfig"
